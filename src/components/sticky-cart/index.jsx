@@ -17,16 +17,79 @@ import {
   Stack,
   Text,
   useDisclosure,
+  Heading,
+  SimpleGrid,
+  Textarea,
 } from "@chakra-ui/react";
-import axios from 'axios';
+import axios from "axios";
 import { useContext, useState } from "react";
 import { BsArrowDownCircle, BsArrowUpCircle } from "react-icons/bs";
 import { RiShoppingCartLine } from "react-icons/ri";
-
+import PaymentForm from "./PaymentForm";
 import { CartContext } from "../../App";
 
 const StickyCart = () => {
+
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  //código para desplegar el primer formulario de compra: 
+  const [isPaymentFormOpen, setIsPaymentFormOpen] = useState(false);
+
+  const handleOpenPaymentForm = () => {
+    onClose();
+    setIsPaymentFormOpen(true);
+    console.log("se abrió con exito el paymenForm");
+  };
+
+  const handleClosePaymentForm = () => {
+    setIsPaymentFormOpen(false);
+  };
+
+  //Estilos en línea para el formulario paymentForm: 
+  const modalStyles = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)", // Fondo semitransparente
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    zIndex: 999, // Asegura que esté por encima del carrito
+    margin: "auto",
+    overflowY: "auto",
+    
+   /*  maxHeight: "80", */
+    
+  };
+ //Estilos en línea para el modal: 
+  const modalContentStyles = {
+    backgroundColor: "bgLight",
+    padding: "10px",
+    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+    maxWidth: "100%", // Cambia el ancho según tus necesidades
+    display: "flex",
+    flexDirection : "column",
+    borderRadius: "30px",
+   
+  };
+
+  const cancelButtonStyles = {
+    fontSize: "14px", /* Reduce el tamaño de fuente */
+    padding: "10px 20px", /* Ajusta el espaciado interior para achicar el botón */
+    border: "1px solid #4F4F4F",
+    borderRadius: "30px", /* Ajusta el radio del borde para hacerlo más pequeño */
+    background: "rgba(0, 0, 0, 0.5)",
+    fontWeight: 200,
+    width: "auto",
+    color: "#ffff",
+    height: "40%", /* Reduce la altura del botón */
+    margin: "auto", /* Centra el botón horizontalmente */
+    display: "flex",
+    alignItems: "center",
+  };
+
 
   const { cartState, setCartState } = useContext(CartContext);
 
@@ -54,26 +117,31 @@ const StickyCart = () => {
     }
   };
   const getTotalAmount = () => {
-    return cartState.reduce((acc, item) => acc + parseFloat(item.price) * item.quantity, 0).toFixed(3);
+    return cartState
+      .reduce((acc, item) => acc + parseFloat(item.price) * item.quantity, 0)
+      .toFixed(3);
   };
 
-  const updatedCartState = cartState.map(item => ({
+  const updatedCartState = cartState.map((item) => ({
     ...item,
-    notaPedido: '', // O inicializa con algún valor predeterminado si es necesario
+    notaPedido: "", // O inicializa con algún valor predeterminado si es necesario
   }));
 
   const handleSubmit = async () => {
     try {
       const cartArray = Object.values(cartState);
-      const response = await axios.post('https://amw.createch.com.ar/api/submit-carritoCompras' , cartArray /*(esta variable enviaría la data de la compra) */);
+      const response = await axios.post(
+        "https://amw.createch.com.ar/api/submit-carritoCompras",
+        cartArray /*(esta variable enviaría la data de la compra) */
+      );
       console.log(cartArray);
       const paymentUrl = response.data.data.url;
-        // Redirige al usuario a la página de pago de Mobbex con la URL de checkout
+      // Redirige al usuario a la página de pago de Mobbex con la URL de checkout
       window.location.href = paymentUrl;
     } catch (error) {
-      console.error('Error al activar el controlador: ', error);
+      console.error("Error al activar el controlador: ", error);
     }
-  }
+  };
   return (
     <Box>
       <Box
@@ -205,13 +273,12 @@ const StickyCart = () => {
                   value={cartState.notaPedido}
                   onChange={(event) =>
                     setCartState((prevCartState) =>
-                    prevCartState.map((item) => ({
-                      ...item,
-                      notaPedido: event.target.value,
-                    }))
-                  )
-                }
-                  
+                      prevCartState.map((item) => ({
+                        ...item,
+                        notaPedido: event.target.value,
+                      }))
+                    )
+                  }
                 />
                 <Button
                   fontSize="15px"
@@ -222,15 +289,34 @@ const StickyCart = () => {
                   width="100%"
                   color="#ffff"
                   height="55px"
-                  onClick={handleSubmit}
+                  onClick={handleOpenPaymentForm}
+                  /* onClick={handleSubmit} */
                 >
                   Comprar
                 </Button>
+                
               </Stack>
             </DrawerFooter>
           </DrawerContent>
         </Drawer>
       </Box>
+      {/* Mostrar el formulario de pago si isPaymentFormOpen es true */}
+      {isPaymentFormOpen && (
+                  <div style={modalStyles}>
+                  <div style={modalContentStyles}>
+                    <PaymentForm />
+                    <div style={{ maxHeight: '60vh', overflowY: 'auto', marginTop: '2vh', }}>
+                    {/* Botón "Cancelar Compra":*/}
+                    <Button
+                      style={cancelButtonStyles}
+                      onClick={handleClosePaymentForm}
+                    >
+                      Cancelar Compra
+                    </Button>
+                    </div>
+                  </div>
+                  </div>
+                )}
     </Box>
   );
 };

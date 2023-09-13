@@ -1,0 +1,21 @@
+nombre apellido
+email
+celular (formato 54-9-261-654-0953)
+
+cp
+calle
+numero
+manzana
+barrio
+localidad
+provincia
+
+Box,
+    Heading,
+    SimpleGrid,
+    Stack,
+    Text,
+    Flex,
+    Input,
+    Textarea,
+    Button,

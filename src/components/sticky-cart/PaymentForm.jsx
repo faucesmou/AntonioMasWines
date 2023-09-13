@@ -29,8 +29,59 @@ const PaymentForm = () => {
     provincia: "",
   }); //ver si va la última coma o no.
 
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  const validateForm = () => {
+    const validationErrors = {};
+    if (formData2.nombreApellido.trim() === "") {
+      validationErrors.nombreApellido = "El Nombre y Apellido es requerido";
+    }
+    if (formData2.email.trim() === "") {
+      validationErrors.email = "El Email es requerido";
+    }
+    if (formData2.celular.trim() === "") {
+      validationErrors.celular = "El Teléfono es requerido";
+    } 
+    if (formData2.cp.trim() === "") {
+      validationErrors.cp = "El Código Postal es requerido";
+    }
+    if (formData2.calle.trim() === "") {
+      validationErrors.calle = "La Calle es requerida";
+    }
+    if (formData2.numero.trim() === "") {
+      validationErrors.numero = "El Número es requerido";
+    }
+    if (formData2.manzana.trim() === "") {
+      validationErrors.manzana = "La Manzana es requerida";
+    }
+    if (formData2.barrio.trim() === "") {
+      validationErrors.barrio = "El Barrio es requerido";
+    }
+    if (formData2.localidad.trim() === "") {
+      validationErrors.localidad = "La Localidad es requerida";
+    }
+    if (formData2.provincia.trim() === "") {
+      validationErrors.provincia = "La Provincia es requerida";
+    } if (!isValidEmail(formData2.email) && formData2.email.trim() != "" ) {
+      validationErrors.email = "Formato de Email inválido";
+    }
+    return validationErrors;
+  };
+
+  const isValidEmail = (email) => {
+    // Lógica de validación de email
+    // Usamos una expresión regular para verificar si el email cumple con el patrón estándar.
+    let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+  
+
   const handleSubmit = async () => {
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length === 0) {
     try {
+      
       const dataCompra = {
         cartArray: Object.values(cartState),
         paymentFormData: formData2,
@@ -47,10 +98,17 @@ const PaymentForm = () => {
       // Redirección al usuario a la página de pago de Mobbex con la URL de checkout:
 
       const paymentUrl = response.data.data.url;
+      console.log('este es el paymentUrl--->', paymentUrl)
       window.location.href = paymentUrl;
+      setFormSubmitted(true);
     } catch (error) {
       console.error("Error al enviar el paymentForm:---> ", error);
     }
+  } else {
+    setErrors(validationErrors);
+    console.log("errores de validación: " + JSON.stringify(validationErrors));
+    setFormSubmitted(false);
+  }
   };
   return (
     <Flex
@@ -110,6 +168,7 @@ const PaymentForm = () => {
                     }))
                   }
                 />
+                {errors.nombreApellido && <span>{errors.nombreApellido}</span>}
                 <Input
                   borderRadius="10px"
                   color="black"
@@ -125,6 +184,7 @@ const PaymentForm = () => {
                     }))
                   }
                 />
+                {errors.email && <span>{errors.email}</span>}
                 <Input
                   borderRadius={"10px"}
                   color="black"
@@ -140,6 +200,7 @@ const PaymentForm = () => {
                     }))
                   }
                 />
+                {errors.celular && <span>{errors.celular}</span>}
                 <Flex direction={{ base: "column", lg: "row" }} gap={3}>
                   <Input
                     borderRadius={"10px"}
@@ -171,12 +232,12 @@ const PaymentForm = () => {
                       }))
                     }
                   />
-
+                     
                   <Input
                     borderRadius={"10px"}
                     color="black"
                     borderColor="rgba(0,0,0)"
-                    placeholder="número"
+                    placeholder="Número"
                     _placeholder={{ opacity: 0.4, color: "inherit" }}
                     _hover={{ borderColor: "black" }}
                     value={formData2.numero}
@@ -187,7 +248,7 @@ const PaymentForm = () => {
                       }))
                     }
                   />
-
+                   
                   <Input
                     borderRadius={"10px"}
                     color="black"
@@ -203,6 +264,7 @@ const PaymentForm = () => {
                       }))
                     }
                   />
+                  
                 </Flex>
                 <Flex direction={{ base: "column", lg: "row" }} gap={3}>
                   <Input
@@ -220,6 +282,7 @@ const PaymentForm = () => {
                       }))
                     }
                   />
+                  
                   <Input
                     borderRadius={"10px"}
                     color="black"
@@ -252,6 +315,13 @@ const PaymentForm = () => {
                     }
                   />
                 </Flex>
+                  {errors.cp && <span>{errors.cp}</span>}
+                  {errors.calle && <span>{errors.calle}</span>}
+                  {errors.numero && <span>{errors.numero}</span>}
+                  {errors.manzana && <span>{errors.manzana}</span>}
+                  {errors.barrio && <span>{errors.barrio}</span>}
+                  {errors.localidad && <span>{errors.localidad}</span>}
+                  {errors.provincia && <span>{errors.provincia}</span>}
                 <Button
                   alignSelf="flex-end"
                   color="black"

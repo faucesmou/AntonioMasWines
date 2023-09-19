@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
-import { Box, Heading, Icon, Image, Text } from "@chakra-ui/react";
+import { Box, Heading, Icon, Image, Text, Button, Input, AspectRatio, SimpleGrid, Stack, useDisclosure} from "@chakra-ui/react";
+import { Link } from "react-router-dom";
+
 import { AiOutlinePlusCircle } from "react-icons/ai";
 import S1 from "../../../../../../assets/imgs/s1.png";
 import S2 from "../../../../../../assets/imgs/s2.png";
@@ -14,12 +16,14 @@ import A2 from "../../../../../../assets/imgs/a2.png";
 import H1 from "../../../../../../assets/imgs/h1.png";
 import H2 from "../../../../../../assets/imgs/h2.png";
 import H3 from "../../../../../../assets/imgs/h3.png";
-import ActionBtn from "../../../../../../assets/imgs/action-btn.png";
 import { useLayoutEffect } from "react";
+
 import {
   HiOutlineArrowLongLeft,
   HiOutlineArrowLongRight,
 } from "react-icons/hi2";
+
+
 
 // mixBlendMode="luminosity"  {...bottlesStyles}
 const style = {
@@ -957,7 +961,17 @@ const LargeScreensWines = () => {
     document.querySelector(`.${item}Image`).style.opacity = 0.5;
     document.querySelector(`.${item}Icon`).style.display = "none";
   };
-
+  
+  const { isOpen, onOpen } = useDisclosure();
+  const handleOpenAndScroll = () => {
+    onOpen();
+    setTimeout(() => {
+      const element = document.getElementById("inicio");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); 
+  };
   return (
     <Box
       userSelect="none"
@@ -1449,7 +1463,26 @@ const LargeScreensWines = () => {
           top="466px"
           left="2590px"
         >
-          <Image src={ActionBtn} />
+             <Button
+            as={Link} 
+            to="/tiendaOnline#inicio"
+            bg="black"
+            color="white"
+            border="1px solid"
+            borderColor="rgba(0, 0, 0, 1)"
+            borderRadius="29px"
+            p="26px"
+            fontSize="14px"
+            fontWeight={400}
+            lineHeight="16px"
+            cursor="pointer"
+            transition="background-color 0.3s"
+            _hover={{ backgroundColor: "black", transform: "scale(1.1)" }} 
+            width="fit-content"
+            onClick={handleOpenAndScroll}
+          >
+            Ver todos los vinos
+          </Button>
         </Box>
       </Box>
     </Box>

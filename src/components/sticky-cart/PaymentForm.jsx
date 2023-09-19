@@ -1,4 +1,6 @@
 import {
+  CSSReset,
+  ChakraProvider,
   Box,
   Heading,
   SimpleGrid,
@@ -110,6 +112,19 @@ const PaymentForm = () => {
     setFormSubmitted(false);
   }
   };
+  //personalización de la barra scroll para evitar que se vea: 
+  const customScrollbarStyles = {
+    "&::-webkit-scrollbar": {
+      width: "0.5em",
+    },
+    "&::-webkit-scrollbar-track": {
+      background: "transparent",
+    },
+    "&::-webkit-scrollbar-thumb": {
+      background: "transparent",
+      outline: "1px solid transparent",
+    },
+  };
   return (
     <Flex
       direction="column"
@@ -118,6 +133,7 @@ const PaymentForm = () => {
       pt={3}
       pb={5}
       color="black"
+      css={customScrollbarStyles} 
       style={{
         overflowY: "auto",
         marginTop: "10vh",
@@ -138,12 +154,13 @@ const PaymentForm = () => {
             mx={{ base: "10px", lg: 0 }}
             fontStyle="italic"
             fontWeight={200}
-            fontSize={{ base: "4vw", lg: "5vw" }}
+            fontSize={{ base: "5vw", lg: "5vw" }}
           >
             Información para la compra
           </Heading>
           <Box mb={{ base: 0, lg: 0 }}>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form 
+            onSubmit={(e) => e.preventDefault()}>
               <Stack
                 align="center"
                 direction="column"
@@ -282,7 +299,6 @@ const PaymentForm = () => {
                       }))
                     }
                   />
-                  
                   <Input
                     borderRadius={"10px"}
                     color="black"
@@ -298,7 +314,6 @@ const PaymentForm = () => {
                       }))
                     }
                   />
-
                   <Input
                     borderRadius={"10px"}
                     color="black"

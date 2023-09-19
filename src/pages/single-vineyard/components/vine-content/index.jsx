@@ -27,7 +27,11 @@ import P1 from "../../../../assets/imgs/p1.png";
 import P2 from "../../../../assets/imgs/p2.png";
 import P3 from "../../../../assets/imgs/p3.png";
 import { FiShoppingCart } from "react-icons/fi";
-import { BsArrowUpCircle, BsFileEarmarkArrowDown } from "react-icons/bs";
+import {
+  BsArrowUpCircle,
+  BsFileEarmarkArrowDown,
+  BsArrowDownCircle,
+} from "react-icons/bs";
 import Rating from "./rating";
 import CustomWineCard from "./custom-wine-card";
 import Footer from "../../../../components/footer";
@@ -119,6 +123,38 @@ const VineContent = () => {
     setCartState(newArray);
   };
 
+  const updateQuantity2 = (text,action) => {
+    if (!cartState.length) {
+      toast({
+        title: "Cart is empty!!",
+        status: "error",
+        isClosable: true,
+        position: "top",
+      });
+
+      return;
+    }
+    const foundItem = cartState.filter((item) => item.text === text)[0];
+    if (!foundItem) {
+      toast({
+        title: "Item not found in cart!!",
+        status: "error",
+        isClosable: true,
+        position: "top",
+      });
+
+      return;
+    }
+    let newArray = cartState.map((item) =>
+      item.text === text ? { ...item, quantity: item.quantity > 0 ? item.quantity - 1  : 0 } : item
+    );
+    console.log(newArray);
+    newArray = newArray.filter((item) => item.quantity > 0);
+
+    setCartState(newArray);
+  };
+
+
   const getQuantity = () => {
     const item = cartState.filter(
       (item) => item.text === "Single Vineyard Malbec 2021"
@@ -133,8 +169,8 @@ const VineContent = () => {
       (item) => item.text === "Single Vineyard Malbec 2021"
     )[0];
 
-    if (item) return item.quantity * item.price;
-    return 9.0;
+    if (item) return (item.quantity * item.price).toFixed(3);
+    return 0.0;
   };
 
   return (
@@ -166,6 +202,7 @@ const VineContent = () => {
               fontSize={{ base: "18px", lg: "32px" }}
               fontWeight={{ base: 600, md: 400 }}
               lineHeight="48px"
+              mt={10}
             >
               Malbec 2021
             </Text>
@@ -217,6 +254,15 @@ const VineContent = () => {
                       as={BsArrowUpCircle}
                       onClick={() =>
                         updateQuantity("Single Vineyard Malbec 2021")
+                      }
+                      width="26px"
+                      height="26px"
+                      _hover={{ cursor: "pointer" }}
+                    />
+                    <Icon
+                      as={BsArrowDownCircle}
+                      onClick={() =>
+                        updateQuantity2("Single Vineyard Malbec 2021", "decrease")
                       }
                       width="26px"
                       height="26px"

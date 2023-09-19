@@ -155,7 +155,8 @@ const VineContent = () => {
 
   return (
     <Box bg="bgLight" position="relative">
-      <Flex color="bgDark" justify="center" pb={{ base: 0, md: "15px" }}>
+      <div id="inicio"></div>
+      <Flex  color="bgDark" justify="center" pb={{ base: 0, md: "15px" }}>
         <Flex
           direction="column"
           gap={4}
@@ -168,6 +169,7 @@ const VineContent = () => {
             align="center"
             mb={4}
           >
+            
             <Heading
               fontStyle="italic"
               fontSize={{ base: "44px", md: "50px", lg: "70px", xl: "100px" }}
@@ -186,6 +188,7 @@ const VineContent = () => {
           </Stack>
 
           <Flex alignItems="center">
+          
             <Text marginRight="10px" fontWeight="bold" > Ordenar por: </Text>
             <Select
               value={filterType}

@@ -23,6 +23,16 @@ const Navbar = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = useRef();
 
+  const handleOpenAndScroll = () => {
+    onOpen();
+    setTimeout(() => {
+      const element = document.getElementById("inicio");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }); 
+  };
+
   return (
     <Box
       bg="rgba(30,30,30,0.7)"
@@ -90,19 +100,19 @@ const Navbar = () => {
                   color="bgLight"
                 >
                   <Text>
-                    <Link to="/singlevineyard">Inicio</Link>
+                    <Link onClick={handleOpenAndScroll} to="/singlevineyard#inicio">Inicio</Link>
                   </Text>
                   <Text>
-                    <Link to="/NuestrosVinos">Nuestros vinos</Link>
+                    <Link onClick={handleOpenAndScroll}  to="/NuestrosVinos#inicio">Nuestros vinos</Link>
                   </Text>
                   <Text>
-                    <Link to="/tiendaOnline">Tienda Online</Link>
+                    <Link onClick={handleOpenAndScroll}  to="/tiendaOnline#inicio">Tienda Online</Link>
                   </Text>
                   <Text>
-                    <Link to="/beyondthewine">Enoteca</Link>
+                    <Link onClick={handleOpenAndScroll}  to="/beyondthewine#inicio">Enoteca</Link>
                   </Text>
                   <Text>
-                    <Link to="/QuienesSomos">Quienes somos</Link>
+                    <Link onClick={handleOpenAndScroll}  to="/QuienesSomos#inicio">Quienes somos</Link>
                   </Text>
                 </Stack>
               </DrawerBody>

@@ -29,23 +29,21 @@ import PaymentForm from "./PaymentForm";
 import { CartContext } from "../../App";
 
 const StickyCart = () => {
-
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  //código para desplegar el primer formulario de compra: 
+  //código para desplegar el primer formulario de compra:
   const [isPaymentFormOpen, setIsPaymentFormOpen] = useState(false);
 
   const handleOpenPaymentForm = () => {
     onClose();
     setIsPaymentFormOpen(true);
-    console.log("se abrió con exito el paymenForm");
   };
 
   const handleClosePaymentForm = () => {
     setIsPaymentFormOpen(false);
   };
 
-  //Estilos en línea para el formulario paymentForm: 
+  //Estilos en línea para el formulario paymentForm:
   const modalStyles = {
     position: "fixed",
     top: 0,
@@ -59,37 +57,36 @@ const StickyCart = () => {
     zIndex: 999, // Asegura que esté por encima del carrito
     margin: "auto",
     overflowY: "auto",
-    
-   /*  maxHeight: "80", */
-    
+
+    /*  maxHeight: "80", */
   };
- //Estilos en línea para el modal: 
+  //Estilos en línea para el modal:
   const modalContentStyles = {
     backgroundColor: "bgLight",
     padding: "10px",
     boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
     maxWidth: "100%", // Cambia el ancho según tus necesidades
     display: "flex",
-    flexDirection : "column",
+    flexDirection: "column",
     borderRadius: "30px",
-   
   };
 
   const cancelButtonStyles = {
-    fontSize: "14px", /* Reduce el tamaño de fuente */
-    padding: "10px 20px", /* Ajusta el espaciado interior para achicar el botón */
+    fontSize: "14px" /* Reduce el tamaño de fuente */,
+    padding:
+      "10px 20px" /* Ajusta el espaciado interior para achicar el botón */,
     border: "1px solid #4F4F4F",
-    borderRadius: "30px", /* Ajusta el radio del borde para hacerlo más pequeño */
+    borderRadius:
+      "30px" /* Ajusta el radio del borde para hacerlo más pequeño */,
     background: "rgba(0, 0, 0, 0.5)",
     fontWeight: 200,
     width: "auto",
     color: "#ffff",
-    height: "40%", /* Reduce la altura del botón */
-    margin: "auto", /* Centra el botón horizontalmente */
+    height: "40%" /* Reduce la altura del botón */,
+    margin: "auto" /* Centra el botón horizontalmente */,
     display: "flex",
     alignItems: "center",
   };
-
 
   const { cartState, setCartState } = useContext(CartContext);
 
@@ -247,7 +244,7 @@ const StickyCart = () => {
                           </Flex>
                         </Flex>
                       </Stack>
-                      <Text>${item.price * item.quantity}</Text>
+                      <Text>${(item.price * item.quantity).toFixed(3)}</Text>
                     </Stack>
                     <Divider bg="bgDark" />
                   </Stack>
@@ -280,6 +277,7 @@ const StickyCart = () => {
                     )
                   }
                 />
+                { cartState.length > 0? (
                 <Button
                   fontSize="15px"
                   border=" 1px solid #4F4F4F"
@@ -290,11 +288,10 @@ const StickyCart = () => {
                   color="#ffff"
                   height="55px"
                   onClick={handleOpenPaymentForm}
-                  /* onClick={handleSubmit} */
-                >
+                  >
                   Comprar
-                </Button>
-                
+                </Button> ) : ( <span> Agrega al menos un artículo al carrito antes de comprar.</span>)}
+
               </Stack>
             </DrawerFooter>
           </DrawerContent>
@@ -302,21 +299,23 @@ const StickyCart = () => {
       </Box>
       {/* Mostrar el formulario de pago si isPaymentFormOpen es true */}
       {isPaymentFormOpen && (
-                  <div style={modalStyles}>
-                  <div style={modalContentStyles}>
-                    <PaymentForm />
-                    <div style={{ maxHeight: '60vh', overflowY: 'auto', marginTop: '2vh', }}>
-                    {/* Botón "Cancelar Compra":*/}
-                    <Button
-                      style={cancelButtonStyles}
-                      onClick={handleClosePaymentForm}
-                    >
-                      Cancelar Compra
-                    </Button>
-                    </div>
-                  </div>
-                  </div>
-                )}
+        <div style={modalStyles}>
+          <div style={modalContentStyles}>
+            <PaymentForm />
+            <div
+              style={{ maxHeight: "60vh", overflowY: "auto", marginTop: "2vh" }}
+            >
+              {/* Botón "Cancelar Compra":*/}
+              <Button
+                style={cancelButtonStyles}
+                onClick={handleClosePaymentForm}
+              >
+                Cancelar Compra
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </Box>
   );
 };

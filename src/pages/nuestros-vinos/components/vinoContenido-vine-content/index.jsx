@@ -62,6 +62,18 @@ import { CartContext } from "../../../../App";
 
 // SwiperCore.use([Autoplay]);
 
+/* const { isOpen, onOpen } = useDisclosure(); */
+
+/*   const handleOpenAndScroll = () => {
+    onOpen();
+    setTimeout(() => {
+      const element = document.getElementById("inicio");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); // Espera 100ms antes de desplazarte
+  }; */
+
 const ratingItems = [
   { text: "Formato", value: 40 },
   { text: "Calificación", value: 90 },
@@ -183,7 +195,16 @@ const VineContent = () => {
   const [historiaHoveredIndex, setHistoriaHoveredIndex] = useState(null);
   const [espumanteHoveredIndex, setEspumanteHoveredIndex] = useState(null);
 
-
+  const { isOpen, onOpen } = useDisclosure(); 
+  const handleOpenAndScroll = () => {
+    onOpen();
+    setTimeout(() => {
+      const element = document.getElementById("inicio");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); // Espera 100ms antes de desplazarte
+  }; 
 
 
 
@@ -251,6 +272,7 @@ const VineContent = () => {
 
   return (
     <Box bg="black" position="relative">
+      <div id="inicio"></div>
       {/* Acá cambiás el fondo de toda la página */}
       <Flex color="bgDark" justify="center" pb={{ base: 0, md: "15px" }}>
         <Flex
@@ -575,7 +597,6 @@ const VineContent = () => {
           marginRight={{ base: "10px", md: "20px", lg: "15px" }}
           mt={10} // Espacio arriba del título
           mb={10}
-          
         >
           
           {/* ... Código existente */}
@@ -588,10 +609,10 @@ const VineContent = () => {
             justifyContent="center"
             alignItems="center"
           >
-            <Box display={{ base: "10px", lg: "30px" }}>
-              
+            <Box display={{ base: "10px", lg: "30px" }}>            
             <Button
-            as={Link} to="/tiendaOnline"
+            as={Link} 
+            to="/tiendaOnline#inicio" 
             bg="rgba(255, 255, 255, 0.5)"
             border="1px solid"
             borderColor="rgb(195, 190, 190)"
@@ -607,11 +628,10 @@ const VineContent = () => {
             _hover={{ backgroundColor: "rgba(67, 62, 62, 0.843)", transform: "scale(1.1)" }}
             my={{ base: 5, md: 0 }} // Ajusta el espacio vertical en el responsive pequeño
             px={{ base: 15, md: 0 }} // Ajusta el espacio horizontal en el responsive pequeño
+            onClick={handleOpenAndScroll} 
           >
             {"Ver tienda Online"}
           </Button>
-          
-              
             </Box >
           </Flex>
         </Flex>

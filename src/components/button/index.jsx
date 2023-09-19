@@ -1,12 +1,23 @@
-import { Box, Button } from "@chakra-ui/react";
+import { Box, Button, useDisclosure } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const CustomButton = ({ text }) => {
+  const { isOpen, onOpen } = useDisclosure();
+
+  const handleOpenAndScroll = () => {
+    onOpen();
+    setTimeout(() => {
+      const element = document.getElementById("inicio");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 100); // Espera 100ms antes de desplazarte
+  };
   return (
     <Box display={{ base: "flex", md: "block" }} justifyContent="center">
       <Button
         as={Link}
-        to="/tiendaOnline"
+        to="/tiendaOnline#inicio"
         border="1px solid rgba(255,255,255,.5)"
         bg="transparent"
         w={{ base: "fit-content", md: "100%" }}
@@ -15,6 +26,7 @@ const CustomButton = ({ text }) => {
         color="#ffff"
         _hover={{ bg: "#3333" }}
         fontWeight={400}
+        onClick={handleOpenAndScroll}
       >
         {text}
       </Button>

@@ -4,6 +4,7 @@ import HeroImg from "../../../../assets/imgs/historias/granpaGrande.png";
 const HeroSection2 = () => {
   return (
     <Box height={{ base: "40vh", md: "80vh" }} bg="bgLight">
+      <div id="inicio"></div>
       <Image
         src={HeroImg}
         width="100%"

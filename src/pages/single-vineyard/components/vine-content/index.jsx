@@ -123,7 +123,7 @@ const VineContent = () => {
     setCartState(newArray);
   };
 
-  const updateQuantity2 = (text,action) => {
+  const updateQuantity2 = (text, action) => {
     if (!cartState.length) {
       toast({
         title: "Cart is empty!!",
@@ -146,14 +146,15 @@ const VineContent = () => {
       return;
     }
     let newArray = cartState.map((item) =>
-      item.text === text ? { ...item, quantity: item.quantity > 0 ? item.quantity - 1  : 0 } : item
+      item.text === text
+        ? { ...item, quantity: item.quantity > 0 ? item.quantity - 1 : 0 }
+        : item
     );
     console.log(newArray);
     newArray = newArray.filter((item) => item.quantity > 0);
 
     setCartState(newArray);
   };
-
 
   const getQuantity = () => {
     const item = cartState.filter(
@@ -213,8 +214,8 @@ const VineContent = () => {
             align={{ base: "center", lg: "start" }}
           >
             <Image src={S1} width={{ base: "150px", lg: "100%" }} />
-            <Stack direction="column" h="100%" justify="space-around">
-              <Flex direction="column" gap={2}>
+            <Stack direction="column" h="100%"  mt={{ base: "10px", lg: "100px" }}/* justify="space-evenly" */>
+              <Flex direction="column" gap={2} mt={{ base: "10px", lg: "10px" }} >
                 <Stack
                   direction="row"
                   spacing={5}
@@ -262,7 +263,10 @@ const VineContent = () => {
                     <Icon
                       as={BsArrowDownCircle}
                       onClick={() =>
-                        updateQuantity2("Single Vineyard Malbec 2021", "decrease")
+                        updateQuantity2(
+                          "Single Vineyard Malbec 2021",
+                          "decrease"
+                        )
                       }
                       width="26px"
                       height="26px"
@@ -300,7 +304,8 @@ const VineContent = () => {
                 direction={{ base: "column", lg: "row" }}
                 justify={{ base: "normal", lg: "space-between" }}
               >
-                <Text width={{ base: "100%", lg: "50%" }}>
+                <Text width={{ base: "100%", lg: "50%" }}
+                 mt={{ base: "10px", lg: 0 }}>
                   Frescos y frutados. Considerando las características de los
                   vinos de altura, buen balance y concentración. El volumen en
                   boca, se percibe notable, pero no excesivo. Elegantes y
@@ -362,7 +367,11 @@ const VineContent = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Box display={{ base: "block", sm: "none" }} pb={10} color="bgDark">
+      <Box
+        display={{ base: "block", sm: "none" }}
+        pb={8}
+        color="bgDark"
+      >
         <Swiper
           modules={[Autoplay]}
           spaceBetween={20}
@@ -373,7 +382,8 @@ const VineContent = () => {
             disableOnInteraction: true,
             pauseOnMouseEnter: true,
             waitForTransition: true,
-          }} // Add this line for autoplay
+          }}
+          /* style={{ zIndex: 1 }} */
         >
           {wineCardData.map(({ image, text, subText, price, btnText }, i) => (
             <SwiperSlide key={i}>
@@ -383,6 +393,8 @@ const VineContent = () => {
                 subText={subText}
                 price={price}
                 btnText={btnText}
+                onAddToCart={() => addToCart(image, text, price)}
+                /* style={{ zIndex: 2 }} */
               />
             </SwiperSlide>
           ))}

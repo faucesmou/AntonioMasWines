@@ -10,24 +10,91 @@ import {
   Button,
   AspectRatio,
 } from "@chakra-ui/react";
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-
-
 const Contact = () => {
-  const [formData2, setFormData2] = useState({});
+  const [formData2, setFormData2] = useState({
+    nombre: "",
+    apellido: "",
+    correo: "",
+    asunto: "",
+    mensaje: "",
+  }); 
   
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  useEffect(() => {
+    // Después de que se activa el useEffect por el formulario enviado con éxito, configuramos un temporizador para desactivar el mensaje después de 5 segundos.
+    if (formSubmitted) {
+      const timer = setTimeout(() => {
+        setFormSubmitted(false);
+      }, 5000); // 
+      return () => clearTimeout(timer);
+    }
+  }, [formSubmitted]);
+
+  const [errors, setErrors] = useState({});
+
+
+  const validateForm = () => {
+    const validationErrors = {};
+    if (formData2.nombre.trim() === "") {
+      validationErrors.nombre = "El Nombre es requerido";
+    }
+    if (formData2.apellido.trim() === "") {
+      validationErrors.apellido = "El Apellido es requerido";
+    }
+    if (formData2.correo.trim() === "") {
+      validationErrors.correo = "El Email es requerido";
+    }
+    if (!isValidEmail(formData2.correo) && formData2.correo.trim() != "" ) {
+      validationErrors.correo = "Formato de Email inválido";
+    }
+    if (formData2.asunto.trim() === "") {
+      validationErrors.asunto = "El asunto es requerido";
+    } 
+    if (formData2.mensaje.trim() === "") {
+      validationErrors.mensaje = "El mensaje es requerido";
+    } 
+    return validationErrors;
+  };
+  
+  const isValidEmail = (email) => {    
+    let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  };
+
+
   const handleSubmit = async () => {
+    const validationErrors = validateForm();
+    if (Object.keys(validationErrors).length === 0) {
     try {
       const response = await axios.post('https://amw.createch.com.ar/api/submit-form', formData2);
       console.log("acá van los datos del formulario: ----->");
       console.log(formData2);
       console.log(response.data);
+      setErrors({});
+      setFormSubmitted(true);
+      setFormData2({
+        nombre: "",
+        apellido: "",
+        correo: "",
+        asunto: "",
+        mensaje: "",
+      });
     } catch (error) {
       console.error('Error al enviar el formulario:', error);
     }
+  
+  }else {
+    setErrors(validationErrors);
+    console.log("errores de validación: " + JSON.stringify(validationErrors));
+    setFormSubmitted(false);
   }
+}
+
+
   return (
     <Flex direction="column" gap={8} bg="bgLight" pt={10} color="black">
       <Stack direction="column" align="center" gap={3}>
@@ -127,6 +194,7 @@ const Contact = () => {
                     }))
                   }
                 />
+                {errors.nombre && <span>{errors.nombre}</span>}
                 <Input
                   borderRadius="10px"
                   color="black"
@@ -142,6 +210,7 @@ const Contact = () => {
                     }))
                   }
                 />
+                {errors.apellido && <span>{errors.apellido}</span>}
                 <Input
                   borderRadius={"10px"}
                   color="black"
@@ -157,6 +226,7 @@ const Contact = () => {
                     }))
                   }
                 />
+                {errors.correo && <span>{errors.correo}</span>}
                 <Input
                   borderRadius={"10px"}
                   color="black"
@@ -172,6 +242,7 @@ const Contact = () => {
                     }))
                   }
                 />
+                {errors.asunto && <span>{errors.asunto}</span>}
                 <Textarea
                   borderRadius="10px"
                   _placeholder={{ opacity: 0.4, color: "inherit" }}
@@ -186,6 +257,10 @@ const Contact = () => {
                     }))
                   }
                 />
+                {errors.mensaje && <span>{errors.mensaje}</span>}
+                {formSubmitted && (
+            <span><h2>Datos enviados con éxito!</h2></span>
+          )}
                 <Button
                   alignSelf="flex-end"
                   color="black"

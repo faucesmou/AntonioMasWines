@@ -117,6 +117,7 @@ const Home = () => {
   }
   return (
     <Box bg="bgDark">
+      <div id="inicio"></div>
       <SimpleGrid columns={{ base: 1, lg: 2 }} gap={5} pb={{ base: 20, md: 0 }}>
         <Box width="100%">
           <Swiper

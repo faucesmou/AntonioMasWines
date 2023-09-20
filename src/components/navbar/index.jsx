@@ -51,7 +51,7 @@ const Navbar = () => {
         pb="21px"
       >
         <Box display={{ base: "none", md: "block" }}></Box>
-        <Link to="/">
+        <Link onClick={handleOpenAndScroll} to="/#inicio" >
           <Image widthidth="263px" height="78px" src={Logo} />
         </Link>
         <Box>

@@ -31,6 +31,7 @@ const BeyondHero = () => {
       height={{ base: "40vh", lg: "70vh" }}
       bg="bgDark"
     >
+      <div id="inicio"></div>
       <Box height="100%">
         <Player {...props} />
       </Box>
@@ -61,34 +62,4 @@ const BeyondHero = () => {
 
 export default BeyondHero;
 
-/*
-const BeyondHero = () => {
-  return (
-    <Box position="relative" height="80vh" bg="bgDark">
-      <Image
-        src={BeyondHeroImg}
-        width="100%"
-        height="100%"
-        objectFit="cover"
-        filter="grayscale(100%)"
-      />
-      <Box
-        position="absolute"
-        bottom="25%"
-        left="5%"
-        fontStyle="italic"
-        fontWeight={300}
-        lineHeight="133px"
-        letterSpacing="0.01em"
-      >
-        <Heading fontSize="100px">Historias más</Heading>
-        <Heading fontSize="100px" textAlign="end">
-          allá del VINO
-        </Heading>
-      </Box>
-    </Box>
-  );
-};
-export default BeyondHero;
 
-*/

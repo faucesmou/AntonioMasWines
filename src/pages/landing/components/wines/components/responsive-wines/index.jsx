@@ -96,7 +96,7 @@ const ResponsiveWines = () => {
                     src={S1}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
                 <Box
@@ -110,7 +110,7 @@ const ResponsiveWines = () => {
                     src={S2}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
                 <Box
@@ -124,7 +124,7 @@ const ResponsiveWines = () => {
                     src={S3}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
               </HStack>
@@ -155,9 +155,12 @@ const ResponsiveWines = () => {
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
                     src={N1}
+                    style={{
+                      filter: 'brightness(100%) contrast(130%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
                 <Box
@@ -169,9 +172,12 @@ const ResponsiveWines = () => {
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
                     src={N2}
+                    style={{
+                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
                 <Box
@@ -183,9 +189,12 @@ const ResponsiveWines = () => {
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
                     src={N3}
+                    style={{
+                      filter: 'brightness(120%) contrast(150%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
                 <Box
@@ -196,10 +205,13 @@ const ResponsiveWines = () => {
                   <Image
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
-                    src={N4}
+                    src={N1}
+                    style={{
+                      filter: 'brightness(100%) contrast(130%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
               </SimpleGrid>
@@ -225,9 +237,12 @@ const ResponsiveWines = () => {
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
                     src={A1}
+                    style={{
+                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
                 <Box
@@ -239,9 +254,12 @@ const ResponsiveWines = () => {
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
                     src={A2}
+                    style={{
+                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
               </SimpleGrid>
@@ -267,9 +285,12 @@ const ResponsiveWines = () => {
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
                     src={H1}
+                    style={{
+                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
                 <Box
@@ -281,9 +302,12 @@ const ResponsiveWines = () => {
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
                     src={H2}
+                    style={{
+                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
                   <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
                 <Box
@@ -295,9 +319,12 @@ const ResponsiveWines = () => {
                     mixBlendMode="luminosity"
                     {...bottlesStyles}
                     src={H3}
+                    style={{
+                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                    }}
                   />
-                  <Box transition="all .1s ease-in">
-                    <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+                  <Box transition="all .1s ease-in" >
+                    {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
                   </Box>
                 </Box>
               </SimpleGrid>
@@ -309,16 +336,4 @@ const ResponsiveWines = () => {
   );
 };
 export default ResponsiveWines;
-{
-  /* <Box>
-      <Swiper
-        modules={[Autoplay]}
-        spaceBetween={20}
-        grabCursor={true}
-        slidesPerView={1}
-        loop={true} // Add this line for looping
-      >
-        <SwiperSlide></SwiperSlide>
-      </Swiper>
-    </Box> */
-}
+

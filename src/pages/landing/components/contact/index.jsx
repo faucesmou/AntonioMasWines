@@ -112,6 +112,7 @@ const Contact = () => {
           definir el concepto de terroir’’
         </Heading>
         <Text
+          id="contacto"
           as="h3"
           fontWeight={600}
           fontFamily="Poppins"
@@ -151,15 +152,16 @@ const Contact = () => {
             spacing={2}
             textAlign={{ base: "center", md: "left" }}
           >
-            <Text as="h4" fontWeight="bold">
+            <Text  as="h4" fontWeight="bold">
               Situado en el corazon del Valle de Uco
             </Text>
             <Text fontWeight={400}>
               Ruta 88 interseccion callejon Campanero, Tupungato, Valle de Uco,
               Argentina. Latitud-33 26 Longitud -69 40
             </Text>
+            
           </Stack>
-
+          
           <Heading
             mx={{ base: "10px", lg: 0 }}
             fontStyle="italic"
@@ -169,6 +171,7 @@ const Contact = () => {
             Contacto
           </Heading>
           <Box mb={{ base: 0, lg: 4 }}>
+            
             <form onSubmit={(e) => e.preventDefault()}>
               <Stack
                 align="center"

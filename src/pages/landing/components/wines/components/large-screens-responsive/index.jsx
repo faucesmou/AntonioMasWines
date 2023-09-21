@@ -955,7 +955,8 @@ const LargeScreensWines = () => {
   };
   const handleMouseLeave = (e, item) => {
     document.querySelector(`.${item}Box`).style.mixBlendMode = "luminosity";
-    document.querySelector(`.${item}Box`).style.zIndex = 0;
+    document.querySelector(`.${item}Box`).style.zIndex = 999;
+   /*  document.querySelector(`.${item}Box`).style.zIndex = 0; */ //ESTO PUEDE ESTAR CAUSANDO PROBLEMAS
     gsap.to(`.${item}Box`, { duration: 0.5, transform: "scale(1)" });
     // document.querySelector(`.${item}Box`).style.transform = "scale(1)";
     document.querySelector(`.${item}Image`).style.opacity = 0.5;
@@ -1053,7 +1054,7 @@ const LargeScreensWines = () => {
           >
             <Image className="s1Image" {...bottlesStyles} src={S1} />
             <Box className="s1Icon" transition="all .1s ease-in" display="none">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
             </Box>
           </Box>
         </Box>
@@ -1077,7 +1078,7 @@ const LargeScreensWines = () => {
               src={S2}
             />
             <Box className="s2Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
             </Box>
           </Box>
         </Box>
@@ -1106,7 +1107,7 @@ const LargeScreensWines = () => {
               display="none"
               transition="all .1s ease-in"
             >
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
             </Box>
           </Box>
         </Box>
@@ -1153,7 +1154,7 @@ const LargeScreensWines = () => {
               src={S3}
             />
             <Box display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
             </Box>
           </Box>
         </Box>
@@ -1207,7 +1208,7 @@ const LargeScreensWines = () => {
               src={N1}
             />
             <Box className="n1Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
             </Box>
           </Box>
         </Box>
@@ -1226,7 +1227,7 @@ const LargeScreensWines = () => {
           >
             <Image className="n2Image" {...bottlesStyles} src={N2} />
             <Box className="n2Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
             </Box>
           </Box>
         </Box>
@@ -1272,7 +1273,7 @@ const LargeScreensWines = () => {
           >
             <Image className="n3Image" {...bottlesStyles} src={N3} />
             <Box className="n3Icon" display="none" transition="all .2s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} />
+             {/*  <Icon as={AiOutlinePlusCircle} {...plusIconStyles} /> */}
             </Box>
           </Box>
         </Box>
@@ -1296,7 +1297,7 @@ const LargeScreensWines = () => {
               src={N4}
             />
             <Box className="n4Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" />
+             {/*  <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" /> */}
             </Box>
           </Box>
         </Box>
@@ -1321,7 +1322,7 @@ const LargeScreensWines = () => {
               src={A1}
             />
             <Box className="a1Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" />
+             {/*  <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" /> */}
             </Box>
           </Box>
         </Box>
@@ -1345,7 +1346,7 @@ const LargeScreensWines = () => {
               src={A2}
             />
             <Box className="a2Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" /> */}
             </Box>
           </Box>
         </Box>
@@ -1404,7 +1405,7 @@ const LargeScreensWines = () => {
               src={H1}
             />
             <Box className="h1Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" /> */}
             </Box>
           </Box>
         </Box>
@@ -1428,7 +1429,7 @@ const LargeScreensWines = () => {
               src={H2}
             />
             <Box className="h2Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" />
+             {/*  <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" /> */}
             </Box>
           </Box>
         </Box>
@@ -1452,13 +1453,13 @@ const LargeScreensWines = () => {
               src={H3}
             />
             <Box className="h3Icon" display="none" transition="all .1s ease-in">
-              <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" />
+              {/* <Icon as={AiOutlinePlusCircle} {...plusIconStyles} left="60%" /> */}
             </Box>
           </Box>
         </Box>
         {/* Historia wines End */}
         <Box
-          position="absolute"
+          position="relative"
           className="action-btn"
           top="466px"
           left="2590px"

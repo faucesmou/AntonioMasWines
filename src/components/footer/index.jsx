@@ -8,14 +8,38 @@ import {
   SimpleGrid,
   Stack,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 import Logo from "../../assets/imgs/logo.png";
 import DefaultIcons from "../social-icons";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef } from 'react';
 import axios from 'axios';
-
+import { Link } from "react-router-dom";
 
 const Footer = ({ position = "static" }) => {
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef();
+
+  const handleOpenAndScroll = () => {
+    onOpen();
+    setTimeout(() => {
+      const element = document.getElementById("inicio");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }); 
+  };
+
+  const handleOpenAndScroll2 = () => {
+    onOpen();
+    setTimeout(() => {
+      const element = document.getElementById("contacto");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }); 
+  };
 
   const [formData3, setFormData3] = useState({
     email: ""
@@ -114,7 +138,10 @@ const Footer = ({ position = "static" }) => {
               {errors.email && <span>{errors.email}</span>}      
         </Flex>
         <Stack direction="column" align="flex-end">
-          <Image src={Logo} />
+          {/* <Image src={Logo} /> */}
+          <Link onClick={handleOpenAndScroll} to="/#inicio" >
+          <Image /* widthidth="263px" height="78px" */ src={Logo} />
+        </Link>
         </Stack>
         <Stack
           direction="column"
@@ -124,10 +151,11 @@ const Footer = ({ position = "static" }) => {
           lineHeight="26px"
           align="center"
         >
-          <Text as="span">Nosotros</Text>
-          <Text as="span">Enoteca</Text>
-          <Text as="span">Nuestros Vinos</Text>
-          <Text as="span">Contacto</Text>
+          <Text as="span"><Link onClick={handleOpenAndScroll}  to="/QuienesSomos#inicio">Nosotros</Link></Text>
+          <Text as="span"><Link onClick={handleOpenAndScroll}  to="/beyondthewine#inicio">Enoteca</Link></Text>
+          <Text as="span"><Link onClick={handleOpenAndScroll}  to="/tiendaOnline#inicio">Nuestros Vinos</Link></Text>
+          <Text as="span"><Link onClick={handleOpenAndScroll2} to="/#contacto">Contacto</Link></Text>
+          
         </Stack>
         <Stack align="center">
           <Stack direction="column" gap={2}>

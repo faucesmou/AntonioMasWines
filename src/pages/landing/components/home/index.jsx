@@ -135,7 +135,7 @@ const Home = () => {
               <Image
                 objectFit="cover"
                 width="100%"
-                height={{ base: "450px", md: "550px" }}
+                height={{ base: "450px", md: "34.375rem" }}
                 src={GrandPa}
               />
             </SwiperSlide>
@@ -143,7 +143,7 @@ const Home = () => {
               <Image
                 objectFit="cover"
                 width="100%"
-                height={{ base: "450px", md: "550px" }}
+                height={{ base: "450px", md: "34.375rem" }}
                 src={GrandPa2}
               />
             </SwiperSlide>
@@ -151,13 +151,13 @@ const Home = () => {
               <Image
                 objectFit="cover"
                 width="100%"
-                height={{ base: "450px", md: "550px" }}
+                height={{ base: "450px", md: "34.375rem" }}
                 src={GrandPa3}
               />
             </SwiperSlide>
           </Swiper>
         </Box>
-        <Box mb={{ base: 0, md: 2 }} height={{ base: "350px", md: "550px" }}>
+        <Box mb={{ base: 0, md: 2 }} height={{ base: "350px", md:"34.375rem"  }}>
           <Text
             as="h4"
             width="fit-content"
@@ -174,7 +174,7 @@ const Home = () => {
           >
             Enoteca
           </Text>
-          <Box mt="30px" h={{ base: "60vh" }} overflow="hidden">
+          <Box mt="30px" h={{ base: "60vh", md: "34.375rem" }} overflow="hidden">
             <Swiper
               spaceBetween={10}
               modules={[Navigation]}

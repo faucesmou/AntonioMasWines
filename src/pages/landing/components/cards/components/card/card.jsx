@@ -29,6 +29,7 @@ const SimpleCard = ({ img, imgUrl, comment }) => {
 					<Flex align="center" gap={2}>
 						<Avatar
 							size="sm"
+							
 							name="Test User Test"
 							src="https://scontent.cdninstagram.com/v/t51.29350-15/117532617_1789270934544619_5007069695905462138_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=Es7Lyl6RgI8AX-qdLay&_nc_ht=scontent.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfBJZeyTfaqsZWQZMRm0wQgVwxipPcTrCAKm3kM298d14g&oe=6516AD99"
 							bg="bgDark"

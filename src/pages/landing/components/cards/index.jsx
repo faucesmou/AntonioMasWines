@@ -10,7 +10,7 @@ import React, { useEffect, useState } from "react";
 
 
 const cards = [
-  { id: 1, imgUrl: "https://scontent.cdninstagram.com/v/t51.29350-15/356069541_232687466253016_3639079261488467129_n.heic?stp=dst-jpg&_nc_cat=105&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=w5IYz7ZhHnQAX8_Ng91&_nc_ht=scontent.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfAn5hHx8aL0Ht0lrW6QEjsRWBMtDkp-l4LAJehH1tBLoQ&oe=6516BB00", comment: "ojota de comentario" },
+  { id: 1, imgUrl: "https://scontent.cdninstagram.com/v/t51.29350-15/356069541_232687466253016_3639079261488467129_n.heic?stp=dst-jpg&_nc_cat=105&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=w5IYz7ZhHnQAX8_Ng91&_nc_ht=scontent.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfAn5hHx8aL0Ht0lrW6QEjsRWBMtDkp-l4LAJehH1tBLoQ&oe=6516BB00" , comment: "ojota de comentario" },
   { id: 2, imgUrl: "https://scontent.cdninstagram.com/v/t51.2885-15/49858026_2199361650301877_5149760420010630632_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=Z_NQYCVSJbQAX8uTNqy&_nc_ht=scontent.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfDzn9MrpFfd5NKK3hywb5KGwYnEH1DszXZ80xRTbqC8GA&oe=6515ED51", comment: "ojota de comentario"  },
   { id: 3, imgUrl: "https://scontent.cdninstagram.com/v/t51.2885-15/42916886_2261916830716570_8638486878159565897_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=w3LPNDkjQ38AX-VXoUM&_nc_ht=scontent.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfCeEayWuc6JfgV3eM1PIWz8_qDcAe1sJn2n_QSjoDVCAQ&oe=651742E0", comment: "ojota de comentario"  },
   { id: 4, imgUrl:"https://scontent.cdninstagram.com/v/t51.29350-15/117532617_1789270934544619_5007069695905462138_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=8ae9d6&_nc_ohc=Es7Lyl6RgI8AX-qdLay&_nc_ht=scontent.cdninstagram.com&edm=ANQ71j8EAAAA&oh=00_AfBJZeyTfaqsZWQZMRm0wQgVwxipPcTrCAKm3kM298d14g&oe=6516AD99", comment: "ojota de comentario"  },

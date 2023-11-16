@@ -32,7 +32,6 @@ const CustomWineCard = ({
         <Text fontWeight={600} lineHeight="36px">
           $ {price}
         </Text>
-
         <Box>
           <Button
             bg="rgba(255, 255, 255, 0.5)"

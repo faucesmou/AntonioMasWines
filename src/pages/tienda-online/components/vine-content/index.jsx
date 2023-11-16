@@ -14,6 +14,7 @@ import { useContext, useState } from "react";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { CartContext } from "../../../../App";
 
+
 // SwiperCore.use([Autoplay]);
 
 const ratingItems = [
@@ -69,6 +70,17 @@ const wineCardData = [
 ];
 
 const VineContent = () => {
+
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const handleOpenAndScroll = () => {
+    onOpen();
+    setTimeout(() => {
+      const element = document.getElementById("inicio");
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }); 
+  };
 
   const [filterType, setFilterType] = useState("menor precio");
   const filterProducts = () => {
@@ -209,16 +221,13 @@ const VineContent = () => {
             </Select>
           </Flex>
 
-
           <Divider borderColor="bgDark" />
-
         
           <Flex
             direction="column"
             gap={8}
             marginTop={{ base: "10px", lg: "45px" }}
             marginBottom={{ base: "10px", lg: "30px" }}>
-
             <Box display={{ base: "10px", lg: "30px" }}> {/* El responsive para pantallas pequeñas */}
               <SimpleGrid
                 columns={{ base: 1, md: 2, lg: 3 }}
@@ -241,7 +250,7 @@ const VineContent = () => {
               </SimpleGrid>
             </Box>
           </Flex>
-         
+          
           <Button
             bg="rgba(255, 255, 255, 0.5)"
             border="1px solid"
@@ -255,10 +264,11 @@ const VineContent = () => {
             maxW="50vw"
             color="black"
             _hover={{ backgroundColor: "#fff", transform: "scale(1.1)" }}
+            onClick={handleOpenAndScroll}
           >
             {"Cargar más"}
           </Button>
-       
+         
         </Flex>
         
       </Flex>

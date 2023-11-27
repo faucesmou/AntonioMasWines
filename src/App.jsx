@@ -4,6 +4,7 @@ import Landing2 from "./pages/quienes-somos/index";
 import SingleVineyard from "./pages/single-vineyard/index";
 import SingleVineyard2 from "./pages/tienda-online/index";
 import NuestrosVinos from "./pages/nuestros-vinos/Index";
+import SuccessView from "./pages/mercadoPago/SuccessView";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import "swiper/css";
@@ -42,8 +43,13 @@ const router = createBrowserRouter([
   {
     path: "/tiendaOnline",
     element: <SingleVineyard2 />,
-  }
+  },
+  {
+    path: "/success/:externalReference",
+    element: <SuccessView />,
+  },
 ]);
+
 function App() {
   const [cartState, setCartState] = useState([]);
 

@@ -99,14 +99,17 @@ const PaymentForm = () => {
 
       // Redirección al usuario a la página de pago de Mobbex con la URL de checkout:
 
-      const paymentUrl = response.data.data.url;
-      console.log('este es el paymentUrl--->', paymentUrl);
+    /*   const paymentUrl = response.data.data.url;
+      console.log('este es el paymentUrl--->', paymentUrl); */
       console.log('este debería ser el url de mercado pago response--->', response)
 
-      window.location.href = response;
+      /* window.location.href = response; */
+      window.location.href = response.data.redirectUrl;
       setFormSubmitted(true);
     } catch (error) {
       console.error("Error al enviar el paymentForm:---> ", error);
+      console.error("Este es el response:---> ", response);
+      console.error("Este es el response.data.redirectUrl:---> ", response.data.redirectUrl);
     }
   } else {
     setErrors(validationErrors);

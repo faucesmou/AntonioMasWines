@@ -45,7 +45,7 @@ const router = createBrowserRouter([
     element: <SingleVineyard2 />,
   },
   {
-    path: "/success/:externalReference",
+    path: "/success/",
     element: <SuccessView />,
   },
 ]);

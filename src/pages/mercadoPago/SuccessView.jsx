@@ -10,7 +10,6 @@ const SuccessView = () => {
       <h1>Pago Exitoso</h1>
       <p>¡Gracias por tu compra!</p>
       <p>Referencia Externa: {externalReference}</p>
-      {/* Puedes personalizar la vista según tus necesidades */}
     </div>
   );
 };

@@ -105,6 +105,7 @@ const PaymentForm = () => {
 
       /* window.location.href = response; */
       window.location.href = response.data.redirectUrl;
+      external_reference = response.data.external_reference;
       setFormSubmitted(true);
     } catch (error) {
       console.error("Error al enviar el paymentForm:---> ", error);

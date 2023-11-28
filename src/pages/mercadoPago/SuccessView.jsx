@@ -1,9 +1,11 @@
 // SuccessView.js
 import React from 'react';
+import { useParams } from 'react-router-dom';
 
 const SuccessView = () => {
 
-    const externalReference = window.location.pathname.split('/').pop();
+   /*  const externalReference = window.location.pathname.split('/').pop(); */
+    const { externalReference } = useParams();
     console.log('este es el external Reference: ', externalReference );
     
   return (

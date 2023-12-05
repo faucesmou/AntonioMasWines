@@ -1,0 +1,30 @@
+.success-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .buyer-info,
+  .purchase-details {
+    margin-top: 20px;
+  }
+  
+  .product-item {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .product-details {
+    margin-left: 20px;
+  }
+  
+  .product-item img {
+    max-width: 70px;
+    max-height: 70px;
+  }
+  
+  /* Agrega estilos adicionales según sea necesario */
+  

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Navbar from "../../components/navbar";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import '../mercadoPago/successView.css';
 
 import {Box,Button,Divider,Drawer,DrawerBody,DrawerCloseButton,DrawerContent,DrawerFooter,DrawerHeader,DrawerOverlay,Flex,HStack,Heading,Icon,IconButton,Image,Input,SimpleGrid,Stack,Text,useDisclosure,Select,useToast,} from "@chakra-ui/react";
 import Footer from "../../components/footer";
@@ -54,59 +55,38 @@ const SuccessView = () => {
   return (
     <div>
       <Navbar />
-      <h1>Pago Exitoso</h1>
-      <p>¡Gracias por tu compra {JSON.stringify(nombreApellido)}!</p>
-      <p>Referencia Externa: {externalReference}</p>
-      <p>datos del comprador: </p>
-      <p>Nombre y Apellido: {JSON.stringify(nombreApellido)}</p>
-      <p>email: {JSON.stringify(email)}</p>
-      <p>celular: {JSON.stringify(celular)}</p>
-      <p>calle: {JSON.stringify(calle)}</p>
-      <p>detalle de la compra: </p>
-      <p>nombreApellidoa: {JSON.stringify(formData)}</p>
-      <p>detalle de tu compra: </p>
-      {formDataCarrito.map((producto) => (
-      <div key={producto.compraCarritoId} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
-        <img src={producto.image} alt={producto.text} style={{ maxWidth: '100px', maxHeight: '100px' }} />
-        <p>Nombre: {producto.text}</p>
-        <p>Precio: {producto.price}</p>
-        <p>Cantidad: {producto.quantity}</p>
+      <div className="success-container">
+        <h1>Pago Exitoso</h1>
+        <p>¡Gracias por tu compra {JSON.stringify(nombreApellido)}!</p>
+        <p>Referencia Externa: {externalReference}</p>
+
+        <div className="buyer-info">
+          <p>Datos del comprador: </p>
+          <p>Nombre y Apellido: {JSON.stringify(nombreApellido)}</p>
+          <p>email: {JSON.stringify(email)}</p>
+          <p>celular: {JSON.stringify(celular)}</p>
+          <p>calle: {JSON.stringify(calle)}</p>
+        </div>
+
+        <div className="purchase-details">
+          <p>Detalle de la compra: </p>
+          {formDataCarrito.map((producto) => (
+           <div key={producto.compraCarritoId} className="product-item">
+               <img src={producto.image} alt={producto.text} />
+              <div className="product-details">
+                <p>Nombre: {producto.text}</p>
+                <p>Precio: {producto.price}</p>
+                <p>Cantidad: {producto.quantity}</p>
+              </div>
+            </div>
+          ))}
+          <p>Precio Final: {precioFinal}</p>
+        </div>
+
       </div>
-    ))}
-      <p>Precio Final: {precioFinal}</p>
-      <Box bg="bgLight" position="relative">
-       <div id="inicio"></div>
-       <Divider borderColor="bgDark" />
 
-       <Flex
-            direction="column"
-            gap={8}
-            marginTop={{ base: "10px", lg: "45px" }}
-            marginBottom={{ base: "10px", lg: "30px" }}>
-            <Box display={{ base: "10px", lg: "30px" }}> {/* El responsive para pantallas pequeñas */}
-              <SimpleGrid
-                columns={{ base: 1, md: 2, lg: 3 }}
-                spacing={{ base: 5, lg: 14 }}
-              >
-                {formDataCarrito.map(
-                  (producto, i) => (
-                    <CustomWineCard
-                    image={producto.image}
-                    key={i}
-                    text={producto.text}
-                    price={producto.price}
-                    quantity={producto.quantity}
-                    style={{ color: "black" }}
-                    />
-                  )
-                )}
-              </SimpleGrid>
-            </Box>
-          </Flex>
-
-      </Box>
       <Footer />
-      
+
     </div>
   );
 };

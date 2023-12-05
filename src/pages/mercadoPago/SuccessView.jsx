@@ -22,6 +22,7 @@ const SuccessView = () => {
           if (response.data.success) {
             // Almacenar los datos en el estado
             setResponseData(response.data);
+            console.error('Almacenando los datos en el estado en el frontend:', response.data);
           } else {
             // Manejar errores si es necesario
             console.error('Error al obtener los datos desde la consulta del frontend:', response.data.error);
@@ -42,13 +43,31 @@ const SuccessView = () => {
 
   // Desestructurar los datos del estado
   const { formData, precioFinal, formDataCarrito } = responseData;
-  
+  const { nombreApellido, email, celular, cp, calle } = formData;
+  console.log('nombreApellido:', nombreApellido, 'email:', email, 'celular:', celular, 'cp:', cp, 'calle:', calle,);
+
   return (
     <div>
       <h1>Pago Exitoso</h1>
-      <p>¡Gracias por tu compra!</p>
+      <p>¡Gracias por tu compra {JSON.stringify(nombreApellido)}!</p>
       <p>Referencia Externa: {externalReference}</p>
-      <p>FormData: {JSON.stringify(formData)}</p>
+      <p>datos del comprador: </p>
+      <p>Nombre y Apellido: {JSON.stringify(nombreApellido)}</p>
+      <p>email: {JSON.stringify(email)}</p>
+      <p>celular: {JSON.stringify(celular)}</p>
+      <p>calle: {JSON.stringify(calle)}</p>
+      <p>detalle de la compra: </p>
+      <p>nombreApellidoa: {JSON.stringify(formData)}</p>
+      <p>detalle de tu compra: </p>
+      {formDataCarrito.map((producto) => (
+      <div key={producto.compraCarritoId} style={{ border: '1px solid #ccc', margin: '10px', padding: '10px' }}>
+{/*         <p>Producto ID: {producto.compraCarritoId}</p> */}
+        <img src={producto.image} alt={producto.text} style={{ maxWidth: '100px', maxHeight: '100px' }} />
+        <p>Nombre: {producto.text}</p>
+        <p>Precio: {producto.price}</p>
+        <p>Cantidad: {producto.quantity}</p>
+      </div>
+    ))}
       <p>Precio Final: {precioFinal}</p>
       <p>FormDataCarrito: {JSON.stringify(formDataCarrito)}</p>
     </div>

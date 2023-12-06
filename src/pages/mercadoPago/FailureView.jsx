@@ -1,4 +1,4 @@
-// SuccessView.js
+// FailureView.jsx
 import React, { useState, useEffect } from 'react';
 import Navbar from "../../components/navbar";
 import axios from 'axios';
@@ -10,7 +10,7 @@ import Footer from "../../components/footer";
 import CustomWineCard from "./custom-wine-card/index";
 
 
-const SuccessView = () => {
+const FailureView = () => {
 
    /*  const externalReference = window.location.pathname.split('/').pop(); */
     const { externalReference } = useParams();
@@ -56,8 +56,7 @@ const SuccessView = () => {
     <div>
       <Navbar />
       <div className="success-container">
-        <h1>¡Gracias por tu compra {JSON.stringify(nombreApellido)}!</h1>
-        <p>Estado del Pago: {mensajeEstadoCompra}</p>
+        <h1>Su compra no pudo ser procesada</h1>
         <p>Referencia Externa: {externalReference}</p>
 
         <div className="buyer-info">
@@ -91,6 +90,4 @@ const SuccessView = () => {
   );
 };
 
-export default SuccessView;
-
-   
+export default FailureView;

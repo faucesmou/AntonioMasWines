@@ -48,7 +48,7 @@ const SuccessView = () => {
   }
 
   // Desestructurar los datos del estado
-  const { formData, precioFinal, formDataCarrito } = responseData;
+  const { formData, precioFinal, formDataCarrito, mensajeEstadoCompra } = responseData;
   const { nombreApellido, email, celular, cp, calle } = formData;
   console.log('nombreApellido:', nombreApellido, 'email:', email, 'celular:', celular, 'cp:', cp, 'calle:', calle,);
 
@@ -56,8 +56,8 @@ const SuccessView = () => {
     <div>
       <Navbar />
       <div className="success-container">
-        <h1>Pago Exitoso</h1>
-        <p>¡Gracias por tu compra {JSON.stringify(nombreApellido)}!</p>
+        <h1>¡Gracias por tu compra {JSON.stringify(nombreApellido)}!</h1>
+        <p>Estado del Pago: {mensajeEstadoCompra}</p>
         <p>Referencia Externa: {externalReference}</p>
 
         <div className="buyer-info">

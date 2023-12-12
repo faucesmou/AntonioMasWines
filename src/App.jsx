@@ -6,6 +6,7 @@ import SingleVineyard2 from "./pages/tienda-online/index";
 import NuestrosVinos from "./pages/nuestros-vinos/Index";
 import SuccessView from "./pages/mercadoPago/SuccessView";
 import FailureView from "./pages/mercadoPago/FailureView";
+import PendingView from "./pages/mercadoPago/PendingView";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import "swiper/css";
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
   {
     path: "/failure/:externalReference",
     element: <FailureView />,
+  },
+  {
+    path: "/pending/:externalReference",
+    element: <PendingView />,
   },
 ]);
 

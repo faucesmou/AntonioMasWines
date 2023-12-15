@@ -113,10 +113,11 @@ const StickyCart = () => {
       setCartState(newArray);
     }
   };
+
   const getTotalAmount = () => {
     return cartState
-      .reduce((acc, item) => acc + parseFloat(item.price) * item.quantity, 0)
-      .toFixed(3);
+      .reduce((acc, item) => acc + /* parseFloat */Number(item.price) * item.quantity, 0)
+     /*  .toFixed(2) */;
   };
 
   const updatedCartState = cartState.map((item) => ({
@@ -244,7 +245,7 @@ const StickyCart = () => {
                           </Flex>
                         </Flex>
                       </Stack>
-                      <Text>${(item.price * item.quantity).toFixed(3)}</Text>
+                      <Text>{(item.price * item.quantity).toLocaleString('es-AR')/* .toFixed(2) */}</Text>
                     </Stack>
                     <Divider bg="bgDark" />
                   </Stack>
@@ -256,7 +257,7 @@ const StickyCart = () => {
               <Stack direction="column" gap={3} w="100%">
                 <Flex justify="space-between" fontWeight={600} fontSize="17px">
                   <Text>Subtotal</Text>
-                  <Text>${getTotalAmount()}</Text>
+                  <Text>${getTotalAmount().toLocaleString('es-AR')}</Text>
                 </Flex>
                 <Input
                   variant="flushed"

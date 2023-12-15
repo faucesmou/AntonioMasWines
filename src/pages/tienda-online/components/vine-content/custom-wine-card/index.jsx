@@ -30,7 +30,7 @@ const CustomWineCard = ({
           <Text>{subText}</Text>
         </Stack>
         <Text fontWeight={600} lineHeight="36px">
-          $ {price}
+           {price}
         </Text>
 
         <Box>

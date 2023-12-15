@@ -29,45 +29,70 @@ const wineCardData = [
     image: P1,
     text: "Single Vineyard ",
     subText: "Malbec (x6)",
-    price: "20",
+    price: 350,
     btnText: "Añadir al carrito",
   },
   {
     image: P2,
     text: "Single Vineyard2 ",
     subText: "Chardonay (x6)",
-    price: "10",
+    price: 300,
     btnText: "Añadir al carrito",
   },
   {
     image: P3,
     text: "Núcleo2",
     subText: "Malbec (x6)",
-    price: "5",
+    price: 250,
     btnText: "Añadir al carrito",
   },
   {
     image: P1,
     text: "Single Vineyard3",
     subText: "Malbec (x6)",
-    price: "15",
+    price: 200,
     btnText: "Añadir al carrito",
   },
   {
     image: P2,
     text: "Single Vineyard4",
     subText: "Chardonay (x6)",
-    price: "7",
+    price: 100,
     btnText: "Añadir al carrito",
   },
   {
     image: P3,
     text: "Núcleo3",
     subText: "Malbec (x6)",
-    price: "6",
+    price: 150,
     btnText: "Añadir al carrito",
   },
 ];
+
+const formatter = new Intl.NumberFormat('es-AR', {
+  style: 'currency',
+  currency: 'ARS',
+});
+
+//FUNCIÓN PARA CONVERTIR STRING A NUMBER CON MONEDA ARGENTINA: 
+
+/* const wineCardDataFormatted = wineCardData.map((item) => {
+
+  const priceWithoutSymbol = item.price.replace(/[^0-9.,]/g, '');
+  
+  const priceWithDotSeparator = priceWithoutSymbol.replace(',', '.');
+
+  const numericPrice = Number(priceWithDotSeparator);
+
+  return {
+    ...item,
+    price: numericPrice ,
+  };
+}); */
+
+/* console.log(wineCardDataFormatted); */
+
+
 
 const VineContent = () => {
 
@@ -85,25 +110,33 @@ const VineContent = () => {
   const [filterType, setFilterType] = useState("menor precio");
   const filterProducts = () => {
     let filteredProducts = [...wineCardData];
-
+    console.log('estos son los filteredProducts: -->', filteredProducts );
+    let pruebaDato = filteredProducts[0].price;
+    typeof(pruebaDato)
+    console.log('estos son los filteredProducts.price typeof : -->', typeof pruebaDato );
     if (filterType === "menor precio") {
-      filteredProducts.sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+      filteredProducts.sort((a, b) => Number(a.price) - Number(b.price));
     } else if (filterType === "mayor precio") {
-      filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      filteredProducts.sort((a, b) => Number(b.price) - Number(a.price));
     }
     else if (filterType === "Más vendidos") {
-      filteredProducts.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+      filteredProducts.sort((a, b) => Number(b.price) - Number(a.price));
     }
-    return filteredProducts;
-  };
 
+    return filteredProducts
+        /*  return filteredProducts; acá se agrega al objeto la propiedad formattedPrice que es la que voy a usar para mostrar en pantalla, aunque el resto de las operaciones sean siempre usando price(en formato number) */
+        /*  return filteredProducts.map(product => ({
+          ...product,
+          formattedPrice: product.price.toLocaleString('es-AR'),
+          })); */
+  };
 
 
   const toast = useToast();
 
   const { cartState, setCartState } = useContext(CartContext);
 
-  const addToCart = (image, text, price) => {
+  const addToCart = (image, text, price, formattedPrice) => {
     const foundItem = cartState.filter((item) => item.text === text)[0];
 
     if (foundItem) {
@@ -116,7 +149,7 @@ const VineContent = () => {
 
       return;
     }
-    setCartState([...cartState, { image, text, price, quantity: 1 }]);
+    setCartState([...cartState, { image, text, price: Number(price), quantity: 1, formattedPrice }]);
   };
   const updateQuantity = (text) => {
     if (!cartState.length) {
@@ -234,14 +267,15 @@ const VineContent = () => {
                 spacing={{ base: 5, lg: 14 }}
               >
                 {filterProducts().map(
-                  ({ image, text, subText, price, btnText }, i) => (
+                  ({ image, text, subText, price, btnText, formattedPrice }, i) => (
                     <CustomWineCard
                       image={image}
                       key={i}
                       onAddToCart={() => addToCart(image, text, price)}
                       text={text}
                       subText={subText}
-                      price={price}
+                     /*  price={price} */
+                      price={/* formattedPrice */ price.toLocaleString('es-AR')} //uso el precio formateado
                       btnText={btnText}
                       style={{ color: "black" }}
                     />

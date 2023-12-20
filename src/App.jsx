@@ -7,6 +7,7 @@ import NuestrosVinos from "./pages/nuestros-vinos/Index";
 import SuccessView from "./pages/mercadoPago/SuccessView";
 import FailureView from "./pages/mercadoPago/FailureView";
 import PendingView from "./pages/mercadoPago/PendingView";
+import CargaProductos from "./pages/cargaProductos/CargaProductos";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 import "swiper/css";
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
   {
     path: "/pending/:externalReference",
     element: <PendingView />,
+  },
+  {
+    path: "/cargaProductos",
+    element: <CargaProductos />,
   },
 ]);
 

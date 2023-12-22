@@ -1,6 +1,7 @@
 // SuccessView.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from "../../components/navbar";
+import GrapesSection from "../../components/grapes/index";
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import '../cargaProductos/cargaProductosCSS.css';
@@ -14,6 +15,21 @@ import Footer from "../../components/footer";
 const CargaProductos = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [fileSent, setfileSent] = useState(false);
+  const [fileNotSent, setfileNotSent] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(false);
+
+  useEffect(() => {
+    // Después de que se activa el useEffect por el formulario enviado con éxito, configuramos un temporizador para desactivar el mensaje después de 5 segundos.
+    if (fileSent || fileNotSent) {
+      const timer = setTimeout(() => {
+        setfileSent(false);
+        setfileNotSent(false);
+      }, 5000); // 
+      return () => clearTimeout(timer);
+    }
+  }, [fileSent, fileNotSent]);
+
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
@@ -32,37 +48,87 @@ const CargaProductos = () => {
 
       const formData = new FormData();
       formData.append('archivoExcel', selectedFile);
-  /*                       await axios.get(`https://amw.createch.com.ar/api/statusRequest/${externalReference}`); */
+
       const response = await axios.post('https://amw.createch.com.ar/api/submit-file', formData);
 
+      console.log('Respuesta del Servidor response.data->>', response.data);
       console.log('Respuesta del Servidor response.data.success->>:', response.data.success);
       if (response.data.success) {
         console.log('Datos registrados con éxito:', response.data.message);
-        // Puedes mostrar un mensaje al usuario indicando que los datos fueron recibidos con éxito
         setfileSent(true)
       } else {
-        // La carga de productos falló
         console.error('Error en la carga de productos:', response.data.message);
-        setfileSent(false)
+        setfileSent(false);
+        setfileNotSent(true);
+        setErrorMessage(response.data.message);
       }
     } catch (error) {
-      console.error('Error al enviar el archivo:', error);
-      
+      console.error('Error al enviar el archivo:--> error: ', error);
+        setfileSent(false);
+        setfileNotSent(true);
+        setErrorMessage(error.message);
     }
   };
 
   return (
-    <div>
-         <Navbar />
-      <h1>Sección para subir archivo de Excel con Productos Disponibles</h1>
+    
+    <div className="container">
+       <Navbar />
+      <h1 className="title">Sección para subir archivo de Excel con Productos Disponibles</h1>
 
       {/* Área de arrastrar y soltar */}
+      <div
+        className="dropArea"
+        onDrop={(e) => {
+          e.preventDefault();
+          setSelectedFile(e.dataTransfer.files[0]);
+        }}
+        onDragOver={(e) => e.preventDefault()}
+      >
+        <p>Arrastra y suelta el archivo aquí o</p>
+        <label htmlFor="fileInput">Selecciona un archivo.</label>
+        <input
+          type="file"
+          id="fileInput"
+          className="fileInput"
+          onChange={handleFileChange}
+        />
+      </div>
+
+      {/* Mostrar el nombre del archivo seleccionado */}
+      {selectedFile && <p className="fileUploadedMessage">Archivo seleccionado: {selectedFile.name}</p>}
+      {fileSent && <p className="successMessage">Archivo enviado exitosamente!! </p>}
+      {fileNotSent && <p className="errorMessage">Error al enviar el archivo: {errorMessage}</p>}
+
+      <button className="button" onClick={handleFileUpload}>Enviar archivo</button>
+      <GrapesSection />
+    </div>
+  );
+
+
+  /* return (
+    <div>
+         <Navbar />
+      <h1
+      style={{
+        padding: '10px',
+        marginBottom: '14px',
+        marginTop: '14px',
+        marginLeft: '100px',
+        marginRight: '100px'
+      }}
+      >Sección para subir archivo de Excel con Productos Disponibles</h1>
+
+     
       <div
         style={{
           border: '2px dashed gray',
           borderRadius: 'md',
-          padding: '4px',
-          marginBottom: '4px',
+          padding: '50px',
+          marginBottom: '14px',
+          marginTop: '14px',
+          marginLeft: '100px',
+          marginRight: '400px'
         }}
         onDrop={(e) => {
           e.preventDefault();
@@ -71,7 +137,7 @@ const CargaProductos = () => {
         onDragOver={(e) => e.preventDefault()}
       >
         <p>Arrastra y suelta el archivo aquí o</p>
-        <label htmlFor="fileInput" style={{ cursor: 'pointer', marginTop: '2px' }}>
+        <label htmlFor="fileInput" style={{ cursor: 'pointer', marginTop: '10px' }}>
           Selecciona un archivo
         </label>
         <input
@@ -82,19 +148,23 @@ const CargaProductos = () => {
         />
       </div>
 
-      {/* Mostrar el nombre del archivo seleccionado */}
+ 
       {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
       {fileSent && <p>Archivo enviado exitosamente!! </p>}
 
-      <button onClick={handleFileUpload}>Enviar archivo</button>
-      <Footer />
+      <button  style={{
+        padding: '10px',
+        marginBottom: '14px',
+        marginTop: '14px',
+        marginLeft: '100px',
+        marginRight: '100px'
+      }} onClick={handleFileUpload}>Enviar archivo</button>
+      <GrapesSection />
     </div>
-  );
+  ); */
 };
 
 export default CargaProductos;
-
-
 
 
 

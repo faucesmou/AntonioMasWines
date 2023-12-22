@@ -1,4 +1,59 @@
-.alert {
+/* styles.css */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background-color: black;
+}
+
+.title {
+  padding: 10px;
+  margin: 14px;
+  font-size: 22px;
+}
+
+.dropArea {
+  font-size: 20px;
+  border: 2px dashed gray;
+  border-radius: md;
+  padding: 50px;
+  margin: 14px;
+  cursor: pointer;
+  width: 80%; 
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.fileInput {
+  display: none;
+}
+
+.button {
+  padding: 10px;
+  margin: 14px;
+}
+
+.fileUploadedMessage {
+  font-size: 20px;
+  color: rgb(244, 252, 244);
+  margin: 10px;
+}
+.successMessage {
+  font-size: 20px;
+  color: green;
+  margin: 10px;
+}
+.errorMessage {
+  font-size: 20px;
+  color: rgb(223, 9, 9);
+  margin: 10px;
+}
+
+
+
+/* los siguientes no se estan usando por el momento: */.alert {
     padding: 15px;
     margin-bottom: 20px;
     border: 1px solid transparent;

@@ -13,7 +13,7 @@ import Footer from "../../components/footer";
 
 const CargaProductos = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-
+  const [fileSent, setfileSent] = useState(false);
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     setSelectedFile(file);
@@ -21,6 +21,7 @@ const CargaProductos = () => {
   };
 
   const handleFileUpload = async () => {
+    
     try {
       if (!selectedFile) {
         console.error('Debes seleccionar un archivo.');
@@ -31,19 +32,29 @@ const CargaProductos = () => {
 
       const formData = new FormData();
       formData.append('archivoExcel', selectedFile);
-
+  /*                       await axios.get(`https://amw.createch.com.ar/api/statusRequest/${externalReference}`); */
       const response = await axios.post('https://amw.createch.com.ar/api/submit-file', formData);
 
-      console.log('Respuesta del Servidor:', response.data);
+      console.log('Respuesta del Servidor response.data.success->>:', response.data.success);
+      if (response.data.success) {
+        console.log('Datos registrados con éxito:', response.data.message);
+        // Puedes mostrar un mensaje al usuario indicando que los datos fueron recibidos con éxito
+        setfileSent(true)
+      } else {
+        // La carga de productos falló
+        console.error('Error en la carga de productos:', response.data.message);
+        setfileSent(false)
+      }
     } catch (error) {
       console.error('Error al enviar el archivo:', error);
+      
     }
   };
 
   return (
     <div>
          <Navbar />
-      <h1>Sección para subir archivo de Excel</h1>
+      <h1>Sección para subir archivo de Excel con Productos Disponibles</h1>
 
       {/* Área de arrastrar y soltar */}
       <div
@@ -73,6 +84,7 @@ const CargaProductos = () => {
 
       {/* Mostrar el nombre del archivo seleccionado */}
       {selectedFile && <p>Archivo seleccionado: {selectedFile.name}</p>}
+      {fileSent && <p>Archivo enviado exitosamente!! </p>}
 
       <button onClick={handleFileUpload}>Enviar archivo</button>
       <Footer />
@@ -86,88 +98,3 @@ export default CargaProductos;
 
 
 
-
-/* const CargaProductos = () => {
-
-    const [responseData, setResponseData] = useState(null);
-    const [errors, setErrors] = useState({});
-
-    const handleSubmit = async () => {
-     
-      try {
-        
-        const responseServer = await axios.post(`https://amw.createch.com.ar/api/submit-file`);
-  
-        console.log("Respuesta del Servidor:responseServer--->", responseServer.data);
-        setFormSubmitted(true);
-
-      } catch (error) {
-        console.error("Error al enviar la información:---> ", error);
-        console.error("Este es el response:---> ", responseServer);
-        setFormSubmitted(false);
-       
-      }
-    } 
-    };
-  
-      // Función para realizar la solicitud al backend
-      const handleSubmit2 = async () => {
-        try {
-          // Realizar la solicitud al endpoint correspondiente MODIFICAR
-          const response = await axios.post(`https://amw.createch.com.ar/api//submit-file`);
-  
-          // Verificar si la solicitud fue exitosa
-          if (response.data.success) {
-            // Almacenar los datos en el estado
-            console.log('Almacenando los datos en el estado en el backend: todo parece indicar que fue exitoso, response.data:', response.data);
-            setFormSubmitted(true);
-          } else {
-            // Manejar errores si es necesario
-            console.error('Error al enviar los datos desde la consulta del frontend:', response.data.error);
-            setFormSubmitted(false);
-          }
-        } catch (error) {
-          console.error('Error en el envío a la ruta:', error);
-          setFormSubmitted(false);
-        }
-      };
- */
-
-   
-
-
-  // Verificar si los datos han sido cargados
-/*   if (!responseData) {
-    return <p>Consultando sus datos, por favor espere un momento...</p>;
-  }
-
-  return (
-    <div>
-      <Navbar />
-      <div className="upload-container">
-        <h1>Sección para subir archivo de Excel</h1>
-        <Button
-                  alignSelf="flex-end"
-                  color="black"
-                  type="submit"
-                  bg="transparent"
-                  borderRadius="full"
-                  border="1px solid"
-                  borderColor="rgba(0,0,0)"
-                  fontWeight="medium"
-                  _hover={{ backgroundColor: "white" }}
-                  onClick={handleSubmit}
-                >
-                  Cargar archivo 
-                </Button>
-      </div>
-
-      <Footer />
-
-    </div>
-  );
-};
-
-export default CargaProductos;
- */
-   

@@ -1,6 +1,6 @@
 import { Box, SimpleGrid, Heading, Stack } from "@chakra-ui/react";
 import SimpleCard from "./components/card/card";
-import so1 from "../../../../assets/imgs/historias/nuestroEquipo1.1.jpg";
+import so1 from "../../../../assets/imgs/historias/nuestroEquipo4.jpg";
 import so2 from "../../../../assets/imgs/historias/nuestroEquipo2.2.jpg";
 import so3 from "../../../../assets/imgs/historias/nuestroEquipo3.jpg";
 import so4 from "../../../../assets/imgs/historias/nuestroEquipo4.jpg";

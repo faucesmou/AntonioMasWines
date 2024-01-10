@@ -248,7 +248,7 @@ const Home = () => {
                       
                     >
                       <Text fontSize="18px" color="white">
-                      Fundó la primera bodega boutique argentina: Finca La Anita, donde se inspiró en el concepto de Château francés: viñedos de gran pureza genética y variedad, identificando clones de cada variedad, y cultivando uvas y..
+                      Fundó la primera bodega boutique argentina: Finca La Anita, donde se inspiró en el concepto de Château francés: viñedos de gran pureza genética y variedad, identificando clones de cada variedad, y cultivando uvas.
                       </Text>
                     </Box>
                     <Box
@@ -290,7 +290,7 @@ const Home = () => {
                       
                     >
                       <Text fontSize="18px" color="white">
-                      Lanzó al mercado Finca Propia: el primer emprendimiento argentino que permitió al consumidor de vino comprar su propia parcela de viñedo y producir su propio vino liderado por Antonio
+                      Lanzó al mercado Finca Propia: El primer emprendimiento argentino que permitió al consumidor de vino comprar su propia parcela de viñedo y producir su propio vino liderado por Antonio.
                       </Text>
                     </Box>
                   </Flex>
@@ -330,7 +330,7 @@ const Home = () => {
                       
                     >
                       <Text fontSize="25px" color="white">
-                        2015
+                        2012
                       </Text>
                     </Box>
                     <Box
@@ -343,7 +343,7 @@ const Home = () => {
                       
                     >
                       <Text fontSize="18px" color="white">
-                        Este es el texto a ser personalizado de acuerdo a la historia de la imagen, empresa etc. Se puede modificar de acuerdo a las necesidades.
+                      Formó parte de un proyecto de investigación junto con la UNIVERSIDAD JUAN AGUSTÍN MAZA, INTA  y FINCA PROPIA sobre «La influencia de las especies aromáticas en Malbec, Cabernet Sauvignon y Chardonnay Aromas».
                       </Text>
                     </Box>
                     <Box
@@ -377,7 +377,7 @@ const Home = () => {
                       
                     >
                       <Text fontSize="18px" color="white">
-                      Este es el texto a ser personalizado de acuerdo a la historia de la imagen, empresa etc. Se puede modificar de acuerdo a las necesidades.
+                     Con su hijo Santiago Mas, diseñaron un producto para que el consumidor de vinos pudiera disfrutar de todo lo lindo que rodea la vitivinicultura.
                       </Text>
                     </Box>
                     <Box
@@ -419,7 +419,7 @@ const Home = () => {
                       
                     >
                       <Text fontSize="18px" color="white">
-                      Este es el texto a ser personalizado de acuerdo a la historia de la imagen, empresa etc. Se puede modificar de acuerdo a las necesidades.
+                      Antonio Mas ha tenido una enorme influencia en la vitivinicultura Argentina en los últimos 27 años años. Se destaca por conocer como pocos los secretos del viñedo.
                       </Text>
                     </Box>
                   </Flex>

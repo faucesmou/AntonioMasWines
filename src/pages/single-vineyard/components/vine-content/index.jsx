@@ -55,21 +55,21 @@ const wineCardData = [
     image: P1,
     text: "Single Vineyard ",
     subText: "Malbec (x6)",
-    price: "8.000",
+    price: "Sin stock",
     btnText: "Añadir al carrito",
   },
   {
     image: P2,
     text: "Single Vineyard2 ",
     subText: "Chardonay (x6)",
-    price: "5.000",
+    price: "Sin stock",
     btnText: "Añadir al carrito",
   },
   {
     image: P3,
     text: "Núcleo2",
     subText: "Malbec (x6)",
-    price: "12.000",
+    price: "Sin stock",
     btnText: "Añadir al carrito",
   },
 ];
@@ -79,12 +79,14 @@ const VineContent = () => {
 
   const { cartState, setCartState } = useContext(CartContext);
 
-  const addToCart = (image, text, price) => {
+
+
+ /*  const addToCart = (image, text, price) => {
     const foundItem = cartState.filter((item) => item.text === text)[0];
 
     if (foundItem) {
       toast({
-        title: "Item already added to cart",
+        title: "Este Item ya ha sido agregado al carrito.",
         status: "error",
         isClosable: true,
         position: "top",
@@ -93,11 +95,31 @@ const VineContent = () => {
       return;
     }
     setCartState([...cartState, { image, text, price, quantity: 1 }]);
+  }; */
+  const addToCart = (image, text, price, formattedPrice) => {
+    const foundItem = cartState.filter((item) => item.text === text)[0];
+
+    if (foundItem) {
+      toast({
+        title: "Este Item ya ha sido agregado al Carrito.",
+        status: "error",
+        isClosable: true,
+        position: "top",
+      });
+
+      return;
+    }
+    setCartState([...cartState, { image, text, price: Number(price), quantity: 1, formattedPrice }]);
   };
+
+
+
+
+
   const updateQuantity = (text) => {
     if (!cartState.length) {
       toast({
-        title: "Cart is empty!!",
+        title: "El Carrito está vacío.",
         status: "error",
         isClosable: true,
         position: "top",
@@ -108,7 +130,7 @@ const VineContent = () => {
     const foundItem = cartState.filter((item) => item.text === text)[0];
     if (!foundItem) {
       toast({
-        title: "Item not found in cart!!",
+        title: "Item no encontrado en el Carrito.",
         status: "error",
         isClosable: true,
         position: "top",
@@ -126,7 +148,7 @@ const VineContent = () => {
   const updateQuantity2 = (text, action) => {
     if (!cartState.length) {
       toast({
-        title: "Cart is empty!!",
+        title: "El Carrito está vacío.",
         status: "error",
         isClosable: true,
         position: "top",
@@ -137,7 +159,7 @@ const VineContent = () => {
     const foundItem = cartState.filter((item) => item.text === text)[0];
     if (!foundItem) {
       toast({
-        title: "Item not found in cart!!",
+        title: "Item no encontrado en el Carrito.",
         status: "error",
         isClosable: true,
         position: "top",
@@ -232,7 +254,7 @@ const VineContent = () => {
                       as="span"
                       fontWeight={{ base: 600, md: "600" }}
                     >
-                      $ {getCurrentPrice()}
+                     {/*  $ */} {getCurrentPrice()}
                     </Text>
                   </HStack>
                   <HStack spacing={3}>
@@ -286,16 +308,16 @@ const VineContent = () => {
                     fontSize="14px"
                     fontWeight={400}
                     lineHeight="16px"
-                    onClick={() =>
-                      addToCart(S1, "Single Vineyard Malbec 2021", 12)
-                    }
+                   /*  onClick={() =>
+                      addToCart(S1, "Single Vineyard Malbec 2021", )
+                    } */
                     width={{ base: "100%", sm: "fit-content" }}
                     _hover={{
                       backgroundColor: "#fff",
                       transform: "scale(1.1)",
                     }}
                   >
-                    Añadir al carrito
+                    Momentáneamente sin Stock 
                   </Button>
                 </Box>
               </Flex>
@@ -354,10 +376,10 @@ const VineContent = () => {
                     <CustomWineCard
                       image={image}
                       key={i}
-                      onAddToCart={() => addToCart(image, text, price)}
+                      /* onAddToCart={() => addToCart(image, text, price)} */
                       text={text}
                       subText={subText}
-                      price={price}
+                      price={/* price */price.toLocaleString('es-AR')}
                       btnText={btnText}
                     />
                   )
@@ -391,7 +413,7 @@ const VineContent = () => {
                 image={image}
                 text={text}
                 subText={subText}
-                price={price}
+                price={/* price */price.toLocaleString('es-AR')}
                 btnText={btnText}
                 onAddToCart={() => addToCart(image, text, price)}
                 /* style={{ zIndex: 2 }} */

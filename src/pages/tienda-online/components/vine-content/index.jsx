@@ -3,6 +3,9 @@ import S1 from "../../../../assets/imgs/s1.png";
 import P1 from "../../../../assets/imgs/p1.png";
 import P2 from "../../../../assets/imgs/p2.png";
 import P3 from "../../../../assets/imgs/p3.png";
+import A1 from "../../../../assets/imgs/amarada1002.png";
+/* import A2 from "../../../../assets/imgs/almaradaCavernett.png"; */
+import A2 from "../../../../assets/imgs/AlmaradaCavernetSinFondo.png";
 import { FiShoppingCart } from "react-icons/fi";
 import { BsArrowUpCircle, BsFileEarmarkArrowDown } from "react-icons/bs";
 import Rating from "./rating";
@@ -27,44 +30,58 @@ const ratingItems = [
 const wineCardData = [
   {
     image: P1,
-    text: "Single Vineyard ",
-    subText: "Malbec (x6)",
-    price: 350,
+    text: "Single Vineyard",
+    subText: "Cabernet (x6)",
+    price: 'Sin Stock',
     btnText: "Añadir al carrito",
   },
   {
     image: P2,
-    text: "Single Vineyard2 ",
+    text: "Single Vineyard",
     subText: "Chardonay (x6)",
-    price: 300,
+    price: 'Sin Stock',
     btnText: "Añadir al carrito",
   },
-  {
+ /*  {
     image: P3,
     text: "Núcleo2",
     subText: "Malbec (x6)",
-    price: 250,
+    price: 'Sin Stock',
+    btnText: "Añadir al carrito",
+  }, */
+  {
+    image: S1,
+    text: "Single Vineyard",
+    subText: "Malbec (x6)",
+    price: 'Sin Stock',
     btnText: "Añadir al carrito",
   },
   {
     image: P1,
-    text: "Single Vineyard3",
-    subText: "Malbec (x6)",
-    price: 200,
+    text: "Single Vineyard",
+    subText: "Cabernet (x6)",
+    price: 'Sin Stock',
     btnText: "Añadir al carrito",
   },
   {
     image: P2,
-    text: "Single Vineyard4",
+    text: "Single Vineyard",
     subText: "Chardonay (x6)",
-    price: 100,
+    price: 'Sin Stock',
     btnText: "Añadir al carrito",
   },
-  {
+  /* {
     image: P3,
     text: "Núcleo3",
     subText: "Malbec (x6)",
-    price: 150,
+    price: 'Sin Stock',
+    btnText: "Añadir al carrito",
+  }, */
+  {
+    image: A1,
+    text: "Almarada",
+    subText: "Malbec (x6)",
+    price: 'Sin Stock',
     btnText: "Añadir al carrito",
   },
 ];
@@ -141,7 +158,7 @@ const VineContent = () => {
 
     if (foundItem) {
       toast({
-        title: "Item already added to cart",
+        title: "Este Item ya ha sido agregado al Carrito.",
         status: "error",
         isClosable: true,
         position: "top",
@@ -154,7 +171,7 @@ const VineContent = () => {
   const updateQuantity = (text) => {
     if (!cartState.length) {
       toast({
-        title: "Cart is empty!!",
+        title: "El Carrito está vacío.",
         status: "error",
         isClosable: true,
         position: "top",
@@ -165,7 +182,7 @@ const VineContent = () => {
     const foundItem = cartState.filter((item) => item.text === text)[0];
     if (!foundItem) {
       toast({
-        title: "Item not found in cart!!",
+        title: "Item no encontrado en el Carrito.",
         status: "error",
         isClosable: true,
         position: "top",
@@ -270,8 +287,10 @@ const VineContent = () => {
                   ({ image, text, subText, price, btnText, formattedPrice }, i) => (
                     <CustomWineCard
                       image={image}
+                    /*   minW="150px"
+                      minH="370.53px" */
                       key={i}
-                      onAddToCart={() => addToCart(image, text, price)}
+                      /* onAddToCart={() => addToCart(image, text, price)} */
                       text={text}
                       subText={subText}
                      /*  price={price} */
@@ -279,6 +298,7 @@ const VineContent = () => {
                       btnText={btnText}
                       style={{ color: "black" }}
                     />
+                    
                   )
                 )}
               </SimpleGrid>

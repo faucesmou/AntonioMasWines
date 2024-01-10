@@ -28,7 +28,7 @@ const SuccessView = () => {
           if (response.data.success) {
             // Almacenar los datos en el estado
             setResponseData(response.data);
-            console.error('Almacenando los datos en el estado en el frontend:', response.data);
+            console.log('Almacenando los datos en el estado en el frontend:', response.data);
           } else {
             // Manejar errores si es necesario
             console.error('Error al obtener los datos desde la consulta del frontend:', response.data.error);

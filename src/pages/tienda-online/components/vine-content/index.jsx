@@ -16,8 +16,9 @@ import { Autoplay } from "swiper";
 import { useContext, useState } from "react";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { CartContext } from "../../../../App";
+import axios from 'axios';
 
-
+ 
 // SwiperCore.use([Autoplay]);
 
 const ratingItems = [
@@ -113,6 +114,31 @@ const formatter = new Intl.NumberFormat('es-AR', {
 
 const VineContent = () => {
 
+
+   const consultaProductos = async () => {
+    try {
+  
+        const response = await axios.get('https://amw.createch.com.ar/api/productosDisponibles');
+        const { success, data } = await response.data;/* json(); */
+
+        if (success) {
+            // Acceder a los datos obtenidos
+            console.log("este es el DATA del success de consultaProductos: ", data);
+            const wineCardData2 = data;
+            console.log("este es el wineCardData2 del success de consultaProductos: ", wineCardData2);
+            
+            return wineCardData2;
+        } else {
+            console.error('Error al obtener productos disponibles:', data.message);
+            return null;
+        }
+    } catch (error) {
+        console.error('Error en la llamada a la API para obtener productos disponibles:', error);
+        return null;
+    }
+} 
+
+
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleOpenAndScroll = () => {
     onOpen();
@@ -125,7 +151,10 @@ const VineContent = () => {
   };
 
   const [filterType, setFilterType] = useState("menor precio");
-  const filterProducts = () => {
+  const filterProducts = async () => {
+
+  const wineCardData5 = await consultaProductos() 
+   console.log('Este es el wineCardData5: -->', wineCardData5 );
     let filteredProducts = [...wineCardData];
     console.log('estos son los filteredProducts: -->', filteredProducts );
     let pruebaDato = filteredProducts[0].price;

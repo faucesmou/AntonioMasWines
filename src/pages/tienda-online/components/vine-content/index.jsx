@@ -160,6 +160,7 @@ const VineContent = () => {
     const [filterType, setFilterType] = useState("menor precio");
     const [imagenesCargadas, setImagenesCargadas] = useState([]);
 
+// ASIGNACIÓN DE VALORES DE PRODUCTOS DE BACKEND AL FRONTEND:------------------>
 
     const filterProducts = async () => {
 
@@ -174,6 +175,7 @@ const VineContent = () => {
             product.price = parseFloat(product.price.replace('$', ''));
           });
 
+       /*  let filteredProducts = wineCardData5; */
         let filteredProducts = wineCardData;
         console.log('estos son los filteredProducts: -->', filteredProducts);
         let pruebaDato = filteredProducts[0].price;
@@ -187,26 +189,27 @@ const VineContent = () => {
         else if (filterType === "Más vendidos") {
             filteredProducts.sort((a, b) => Number(b.price) - Number(a.price));
         }
-
         setProductosFiltrados(filteredProducts)
+        
         /*  return filteredProducts; acá se agrega al objeto la propiedad formattedPrice que es la que voy a usar para mostrar en pantalla, aunque el resto de las operaciones sean siempre usando price(en formato number) */
           return filteredProducts.map(product => ({
           ...product,
           formattedPrice: product.price.toLocaleString('es-AR'),
           })); 
     };
-
+  
     useEffect(() => {
         console.log('Ejecutando useEffect con filterType:', filterType);
         filterProducts()
     }, [filterType] )
+    //IMÁGENES   ---------------------------------------------------->
 
     // Función para cargar las imágenes de manera asíncrona
     const cargarImagenes = async () => {
         const imagenes = await Promise.all(
             ProductosFiltrados.map(async ({ image }) => {
                 const rutaCompleta = `${image.replace(/'/g, '"')}`;
-                console.log('Ruta completa:', rutaCompleta);
+                /* console.log('Ruta completa:', rutaCompleta); */
 
                 const imagen = await import(rutaCompleta).then((module) => module.default);
                 return imagen;
@@ -225,7 +228,10 @@ const VineContent = () => {
 
     const { cartState, setCartState } = useContext(CartContext);
 
-    const cargarImagen = async (ruta) => {
+
+    // buscando solución para que se vean las imágenes en el carrito: incompleto: 
+
+   /*  const cargarImagen = async (ruta) => {
         try {
           const imagen = await import(`${ruta}`).then((module) => module.default);
           return imagen;
@@ -233,12 +239,35 @@ const VineContent = () => {
           console.error(`Error cargando la imagen: ${ruta}`, error);
           return null;
         }
-      };
+      }; */
 
-    const addToCart = (image, text, price, formattedPrice) => {
-        const foundItem = cartState.filter((item) => item.text === text)[0];
+// AGREGAR AL CARRITO ----------------------------------------------------->
 
-        if (foundItem) {
+    const addToCart = (image, text, price, stock, formattedPrice) => {
+               
+        if(stock < 1){
+            toast({
+                title: "Momentaneamente Sin Stock.",
+                status: "error",
+                isClosable: true,
+                position: "top",
+            });  
+            return; 
+                }
+/* el if de abajo que usa price ==="Sin Stock" es momentáneo. - el definitivo que se terminará usando es el de stock < 1 */
+        if(price === "Sin Stock"){
+            toast({
+                title: "Momentaneamente Sin Stock.",
+                status: "error",
+                isClosable: true,
+                position: "top",
+            });  
+            return; 
+                }
+
+            const foundItem = cartState.filter((item) => item.text === text)[0];
+            console.log('Ejecutando useEffect con foundItem:', foundItem);
+                 if (foundItem) {
             toast({
                 title: "Este Item ya ha sido agregado al Carrito.",
                 status: "error",
@@ -248,16 +277,17 @@ const VineContent = () => {
 
             return;
         }
-
+/* 
         const imagenProducto = cargarImagen(image);
         if (!imagenProducto) {
-          // Manejar el caso en que no se pueda cargar la imagen
-          return;
-        }
+         
+           return; 
+        } */
 
-        setCartState([...cartState, { image, text, price: Number(price), quantity: 1, formattedPrice }]);
-    };
-    const updateQuantity = (text) => {
+        setCartState([...cartState, { image, text, price: Number(price), quantity: 1, formattedPrice, stock }]);
+        /* }; */
+    
+        const updateQuantity = (text) => {
         if (!cartState.length) {
             toast({
                 title: "El Carrito está vacío.",
@@ -284,7 +314,7 @@ const VineContent = () => {
         );
 
         setCartState(newArray);
-    };
+    };}
 
     const getQuantity = () => {
         const item = cartState.filter(
@@ -373,19 +403,21 @@ const VineContent = () => {
                                 spacing={{ base: 5, lg: 14 }}
                             >
                                 {ProductosFiltrados.map(
-                                    ({ image, text, subText, price, btnText, formattedPrice }, i) => (
+                                    ({ image, text, subText, price, btnText, stock,  formattedPrice }, i) => (
                                         <CustomWineCard
-                                        /* image={image}  */                                  
-                                        image={imagenesCargadas[i]}
+                                       image={image} 
+                                        //NECESITAMOS EL image={imagenesCargadas[i]} DE ABAJO PARA QUE FUNCIONE LA CARGA DE PRODUCTOS DESDE EL BACK(Momentaneamente en desuso por desarrollo, no quitar.):                                 
+                                      /*   image={imagenesCargadas[i]} */
                                         key={i}
                                         text={text}
                                         subText={subText}
-                                        price={/* formattedPrice */ price.toLocaleString('es-AR')} //uso el precio formateado
+                                        price={/* formattedPrice */
+                                        isNaN(price) ? 'Sin Stock' : price.toLocaleString('es-AR') 
+                                        } 
                                         btnText={btnText}
                                         style={{ color: "black" }}
-                                        /* onAddToCart={() => addToCart(image, text, price)} */
+                                        onAddToCart={() => addToCart(image, text, price, stock, formattedPrice)} 
                                         />
-                                        
                                         
                                         )
                                         )}

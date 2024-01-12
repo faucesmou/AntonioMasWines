@@ -39,14 +39,14 @@ const wineCardData = [
         image: P1,
         text: "Single Vineyard",
         subText: "Cabernet (x6)",
-        price: 100,
+        price: "Sin Stock",
         btnText: "Añadir al carrito",
     },
     {
         image: P2,
         text: "Single Vineyard",
         subText: "Chardonay (x6)",
-        price: 200,
+        price: "Sin Stock",
         btnText: "Añadir al carrito",
     },
     /*  {
@@ -60,21 +60,21 @@ const wineCardData = [
         image: S1,
         text: "Single Vineyard",
         subText: "Malbec (x6)",
-        price: 300,
+        price: "Sin Stock",
         btnText: "Añadir al carrito",
     },
     {
         image: P1,
         text: "Single Vineyard",
         subText: "Cabernet (x6)",
-        price: 10000,
+        price: "Sin Stock",
         btnText: "Añadir al carrito",
     },
     {
         image: P2,
         text: "Single Vineyard",
         subText: "Chardonay (x6)",
-        price: 50000,
+        price: "Sin Stock",
         btnText: "Añadir al carrito",
     },
     /* {
@@ -88,7 +88,7 @@ const wineCardData = [
         image: A1,
         text: "Almarada",
         subText: "Malbec (x6)",
-        price: 70000,
+        price: "Sin Stock",
         btnText: "Añadir al carrito",
     },
 ];
@@ -159,8 +159,7 @@ const VineContent = () => {
     const [ProductosFiltrados, setProductosFiltrados] = useState([]);
     const [filterType, setFilterType] = useState("menor precio");
     const [imagenesCargadas, setImagenesCargadas] = useState([]);
-  /*   const [recargaMayorPrecio, setrecargaMayorPrecio] = useState(""); */
-  /*   const [filterType, setFilterType] = useState("menor precio"); */
+
 
     const filterProducts = async () => {
 
@@ -175,7 +174,7 @@ const VineContent = () => {
             product.price = parseFloat(product.price.replace('$', ''));
           });
 
-        let filteredProducts = wineCardData5;
+        let filteredProducts = wineCardData;
         console.log('estos son los filteredProducts: -->', filteredProducts);
         let pruebaDato = filteredProducts[0].price;
         typeof (pruebaDato)
@@ -226,6 +225,16 @@ const VineContent = () => {
 
     const { cartState, setCartState } = useContext(CartContext);
 
+    const cargarImagen = async (ruta) => {
+        try {
+          const imagen = await import(`${ruta}`).then((module) => module.default);
+          return imagen;
+        } catch (error) {
+          console.error(`Error cargando la imagen: ${ruta}`, error);
+          return null;
+        }
+      };
+
     const addToCart = (image, text, price, formattedPrice) => {
         const foundItem = cartState.filter((item) => item.text === text)[0];
 
@@ -239,6 +248,13 @@ const VineContent = () => {
 
             return;
         }
+
+        const imagenProducto = cargarImagen(image);
+        if (!imagenProducto) {
+          // Manejar el caso en que no se pueda cargar la imagen
+          return;
+        }
+
         setCartState([...cartState, { image, text, price: Number(price), quantity: 1, formattedPrice }]);
     };
     const updateQuantity = (text) => {
@@ -359,12 +375,7 @@ const VineContent = () => {
                                 {ProductosFiltrados.map(
                                     ({ image, text, subText, price, btnText, formattedPrice }, i) => (
                                         <CustomWineCard
-                                        
-                                        /* image={image}  */
-                                        /*  image={import(`../../${image}`).default}  */// Importa la imagen utilizando ES6 
-                                        /*   minW="150px"
-                                        minH="370.53px" */
-                                        
+                                        /* image={image}  */                                  
                                         image={imagenesCargadas[i]}
                                         key={i}
                                         text={text}
@@ -372,6 +383,7 @@ const VineContent = () => {
                                         price={/* formattedPrice */ price.toLocaleString('es-AR')} //uso el precio formateado
                                         btnText={btnText}
                                         style={{ color: "black" }}
+                                        /* onAddToCart={() => addToCart(image, text, price)} */
                                         />
                                         
                                         

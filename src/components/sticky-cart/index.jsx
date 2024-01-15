@@ -28,7 +28,13 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import PaymentForm from "./PaymentForm";
 import { CartContext } from "../../App";
 
+import P1 from "../../assets/imgs/p1.png"; 
 import P2 from "../../assets/imgs/p2.png"; 
+import P3 from "../../assets/imgs/p3.png"; 
+import S1 from "../../assets/imgs/s1.png"; 
+import A1 from "../../assets/imgs/amarada1002.png"; 
+import A2 from "../../assets/imgs/AlmaradaCavernetSinFondo.png"; 
+
 
 const StickyCart = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -106,7 +112,7 @@ const StickyCart = () => {
       const imagenes = await Promise.all(
           cartState.map(async ({ image }) => {
               const rutaCompleta = `${image.replace(/'/g, '"')}`;
-               console.log('Ruta completa:', rutaCompleta);  
+               /* console.log('Ruta completa:', rutaCompleta);   */
 
               const imagen3 = await import(rutaCompleta).then((module) => module.default);
               return imagen3;
@@ -155,14 +161,28 @@ const StickyCart = () => {
       .reduce((acc, item) => acc + /* parseFloat */Number(item.price) * item.quantity, 0)
      /*  .toFixed(2) */;
   };
+/* HAY UN PROBLEMA CON EL SUB TEXT: NO SE RECIBEN CORRECTAMENTE DESDE EL CART CONTEXT REVISAR LOS SUBTEXT:  */
+  const cartState2 = cartState.map((item, subText) => {
+    let imagen2;
+    if (item.text === "Single Vineyard" /* && item.subText === "Chardonay (x6)" */) {
+        imagen2 = P2; 
+      } else if (item.text === "Single Vineyard") {
+        imagen2 = P1; 
+      } else if (item.text === "Núcleo3"){
+        imagen2 = P3;
+      } else if (item.text === "Single Vineyard"){
+        imagen2 = S1;
+      } else if (item.text === "Almarada"){
+        imagen2 = A2;   
+      }
 
-  const cartState2 = cartState.map((item) => {
-    const rutaTransformada = item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : '';
-    /* console.log('esta es la rutaTransformada: ', rutaTransformada); */
-   // Crea un nuevo objeto con imagen2 y las demás propiedades
+          /*   const rutaTransformada = item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : ''; */
+            /* console.log('esta es la rutaTransformada: ', rutaTransformada); */
+          // Crea un nuevo objeto con imagen2 y las demás propiedades
    return {
      ...item,
-     imagen2: rutaTransformada,
+     imagen2,
+     subText: subText,
     };
    
        });
@@ -188,6 +208,8 @@ const StickyCart = () => {
       console.error("Error al activar el controlador: ", error);
     }
   };
+  console.log('ESTE ESTE ESTE es el cartState2:--->', cartState2);
+  console.log('ESTE ESTE ESTE es el cartState:--->', cartState);
   return (
     <Box>
       <Box
@@ -252,7 +274,7 @@ const StickyCart = () => {
               }}
             >
               <Stack spacing="24px">
-                {cartState2.map((item, index) => (
+                {cartState2.map((item, index, imagen2) => (
                   
                   <Stack spacing="24px" key={index}>
                     <Stack direction="row" mb="13px">
@@ -264,7 +286,8 @@ const StickyCart = () => {
 
                            /* src={item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : ""} */
                            src={item.imagen2} 
-                           image={imagenesCargadas[item]} 
+                           /* image={imagenesCargadas[item]}  */
+                         /*   image={item.imagen2}  */ 
                           /* alt={Imagen} */
                           width="39px"
                           height="95px"

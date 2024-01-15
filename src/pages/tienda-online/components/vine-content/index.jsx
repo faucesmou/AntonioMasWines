@@ -3,7 +3,6 @@ import S1 from "../../../../assets/imgs/s1.png";
 import P1 from "../../../../assets/imgs/p1.png";
 import P2 from "../../../../assets/imgs/p2.png";
 import P3 from "../../../../assets/imgs/p3.png";
-
 import A1 from "../../../../assets/imgs/amarada1002.png";
 /* import A2 from "../../../../assets/imgs/almaradaCavernett.png"; */
 import A2 from "../../../../assets/imgs/AlmaradaCavernetSinFondo.png";
@@ -197,29 +196,35 @@ const VineContent = () => {
 
 // Mapea el filteredProducts para agregar la propiedad imagen2 con la ruta transformada (PRUEBA):---->
 const filteredProducts2 = filteredProducts.map((item) => {
-    const rutaTransformada = item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : '';
-    console.log('esta es la rutaTransformada: ', rutaTransformada);
-   // Crea un nuevo objeto con imagen2 y las demás propiedades
+    let imagen2;
+    if (item.text === "Single Vineyard" && item.subText === "Chardonay (x6)") {
+        imagen2 = P2; 
+      } else if (item.text === "Single Vineyard" && item.subText === "Cabernet (x6)" ) {
+        imagen2 = P1; 
+      } else if (item.text === "Núcleo3"){
+        imagen2 = P3;
+      } else if (item.text === "Single Vineyard" && item.subText === "Malbec (x6)"){
+        imagen2 = S1;
+      } else if (item.text === "Almarada" && item.subText === "Malbec (x6)"){
+        imagen2 = A2   
+      }
+
      return {
            ...item,
-           imagen2: rutaTransformada,
+           imagen2, 
            };
        });
-       console.log('estos son los filteredProducts2: -->', filteredProducts2);
 
         setProductosFiltrados(filteredProducts2)
+        console.log('estos son los ProductosFiltrados: -->', ProductosFiltrados);
         
-        /*  return filteredProducts; acá se agrega al objeto la propiedad formattedPrice que es la que voy a usar para mostrar en pantalla, aunque el resto de las operaciones sean siempre usando price(en formato number) */
-          return filteredProducts2.map(product => ({
-          ...product,
-          formattedPrice: product.price.toLocaleString('es-AR'),
-          })); 
     };
   
     useEffect(() => {
         console.log('Ejecutando useEffect con filterType:', filterType);
         filterProducts()
     }, [filterType] )
+
     //IMÁGENES   ---------------------------------------------------->
 
     // Función para cargar las imágenes de manera asíncrona
@@ -426,7 +431,7 @@ const filteredProducts2 = filteredProducts.map((item) => {
                                        /* image={image} */  /* ACTUALMENTE ESTÁ SUBIDO ESTE IMAGE */
                                         //NECESITAMOS EL image={imagenesCargadas[i]} DE ABAJO PARA QUE FUNCIONE LA CARGA DE PRODUCTOS DESDE EL BACK(Momentaneamente en desuso por desarrollo, no quitar.):                                 
                                       /*   image={imagenesCargadas[i]}  */
-                                         image={imagen2}  
+                                        image={imagen2}  
                                         key={i}
                                         text={text}
                                         subText={subText}

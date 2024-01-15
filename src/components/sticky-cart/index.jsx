@@ -114,6 +114,7 @@ const StickyCart = () => {
           );
           setImagenesCargadas(imagenes);
           console.log('imagenesCargadas:', imagenesCargadas); 
+          /* esta funcion NO FUNCIONA */
       };
       
       useEffect(() => {
@@ -263,7 +264,7 @@ const StickyCart = () => {
 
                            /* src={item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : ""} */
                            src={item.imagen2} 
-                           image={imagenesCargadas[index]} 
+                           image={imagenesCargadas[item]} 
                           /* alt={Imagen} */
                           width="39px"
                           height="95px"

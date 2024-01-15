@@ -425,8 +425,8 @@ const filteredProducts2 = filteredProducts.map((item) => {
                                         <CustomWineCard
                                        /* image={image} */  /* ACTUALMENTE ESTÁ SUBIDO ESTE IMAGE */
                                         //NECESITAMOS EL image={imagenesCargadas[i]} DE ABAJO PARA QUE FUNCIONE LA CARGA DE PRODUCTOS DESDE EL BACK(Momentaneamente en desuso por desarrollo, no quitar.):                                 
-                                      /*   image={imagenesCargadas[i]}  */
-                                        image={imagen2} 
+                                        image={imagenesCargadas[i]} 
+                                       /*  image={imagen2}  */
                                         key={i}
                                         text={text}
                                         subText={subText}

@@ -22,7 +22,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { BsArrowDownCircle, BsArrowUpCircle } from "react-icons/bs";
 import { RiShoppingCartLine } from "react-icons/ri";
 import PaymentForm from "./PaymentForm";
@@ -35,6 +35,11 @@ const StickyCart = () => {
 
   //código para desplegar el primer formulario de compra:
   const [isPaymentFormOpen, setIsPaymentFormOpen] = useState(false);
+  const [imagenesCargadas, setImagenesCargadas] = useState([]);
+
+
+
+
 
   const handleOpenPaymentForm = () => {
     onClose();
@@ -91,6 +96,31 @@ const StickyCart = () => {
   };
 
   const { cartState, setCartState } = useContext(CartContext);
+
+
+
+   //IMÁGENES   ---------------------------------------------------->
+
+    // Función para cargar las imágenes de manera asíncrona
+    const cargarImagenes = async () => {
+      const imagenes = await Promise.all(
+          cartState.map(async ({ image }) => {
+              const rutaCompleta = `${image.replace(/'/g, '"')}`;
+               console.log('Ruta completa:', rutaCompleta);  
+
+              const imagen3 = await import(rutaCompleta).then((module) => module.default);
+              return imagen3;
+          })
+          );
+          setImagenesCargadas(imagenes);
+          console.log('imagenesCargadas:', imagenesCargadas); 
+      };
+      
+      useEffect(() => {
+      cargarImagenes();
+    }, [cartState]);
+
+    //>>>><>----------------------------------------------------------------->
 
   const updateQuantity = (action, txt) => {
     if (action === "increase") {
@@ -233,7 +263,7 @@ const StickyCart = () => {
 
                            /* src={item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : ""} */
                            src={item.imagen2} 
-                        
+                           image={imagenesCargadas[index]} 
                           /* alt={Imagen} */
                           width="39px"
                           height="95px"

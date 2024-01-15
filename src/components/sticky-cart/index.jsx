@@ -28,7 +28,7 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import PaymentForm from "./PaymentForm";
 import { CartContext } from "../../App";
 
-/* import P2 from "../../assets/imgs/p2.png"; */
+import P2 from "../../assets/imgs/p2.png"; 
 
 const StickyCart = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -102,14 +102,14 @@ const StickyCart = () => {
       setCartState(newArray);
     } else if (action === "decrease") {
       console.log(cartState);
-     /*  console.log(P2); */
+      console.log(P2); 
       let newArray = cartState.map((item) => {
         if (item.text === txt) {
           return { ...item, quantity: item.quantity - 1 };
         }
         return item;
       });
-      console.log(newArray);
+      console.log('este es el newArray:', newArray);
 
       newArray = newArray.filter((item) => item.quantity > 0);
 
@@ -118,10 +118,24 @@ const StickyCart = () => {
   };
 
   const getTotalAmount = () => {
+   /*  console.log('ejecutando el getTotalAmount. Este es el cartState:', cartState ); */
+   console.log('esta es el cartState2:--->', cartState2)
     return cartState
       .reduce((acc, item) => acc + /* parseFloat */Number(item.price) * item.quantity, 0)
      /*  .toFixed(2) */;
   };
+
+  const cartState2 = cartState.map((item) => {
+    const rutaTransformada = item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : '';
+    /* console.log('esta es la rutaTransformada: ', rutaTransformada); */
+   // Crea un nuevo objeto con imagen2 y las demás propiedades
+   return {
+     ...item,
+     imagen2: rutaTransformada,
+    };
+   
+       });
+     
 
   const updatedCartState = cartState.map((item) => ({
     ...item,
@@ -207,7 +221,8 @@ const StickyCart = () => {
               }}
             >
               <Stack spacing="24px">
-                {cartState.map((item, index) => (
+                {cartState2.map((item, index) => (
+                  
                   <Stack spacing="24px" key={index}>
                     <Stack direction="row" mb="13px">
                       <Stack direction="row" fontWeight={600} fontSize="17px">
@@ -216,7 +231,10 @@ const StickyCart = () => {
                         /* ARREGLAR ESTA IMAGENNN: LA RUTA----------------> */
 
 
-                           src={item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : ""}
+                           /* src={item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : ""} */
+                           src={item.imagen2} 
+                        
+                          /* alt={Imagen} */
                           width="39px"
                           height="95px"
                           objectFit="cover"

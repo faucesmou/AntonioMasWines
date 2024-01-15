@@ -178,6 +178,9 @@ const VineContent = () => {
          let filteredProducts = wineCardData5; 
        /*  let filteredProducts = wineCardData; */ /* actualmente está subido ESTE WINE CAR DATA (ESTÁ FIJO) */
 
+          
+
+       
 
         console.log('estos son los filteredProducts: -->', filteredProducts);
         let pruebaDato = filteredProducts[0].price;
@@ -191,10 +194,23 @@ const VineContent = () => {
         else if (filterType === "Más vendidos") {
             filteredProducts.sort((a, b) => Number(b.price) - Number(a.price));
         }
-        setProductosFiltrados(filteredProducts)
+
+// Mapea el filteredProducts para agregar la propiedad imagen2 con la ruta transformada (PRUEBA):---->
+const filteredProducts2 = filteredProducts.map((item) => {
+    const rutaTransformada = item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : '';
+    console.log('esta es la rutaTransformada: ', rutaTransformada);
+   // Crea un nuevo objeto con imagen2 y las demás propiedades
+     return {
+           ...item,
+           imagen2: rutaTransformada,
+           };
+       });
+       console.log('estos son los filteredProducts2: -->', filteredProducts2);
+
+        setProductosFiltrados(filteredProducts2)
         
         /*  return filteredProducts; acá se agrega al objeto la propiedad formattedPrice que es la que voy a usar para mostrar en pantalla, aunque el resto de las operaciones sean siempre usando price(en formato number) */
-          return filteredProducts.map(product => ({
+          return filteredProducts2.map(product => ({
           ...product,
           formattedPrice: product.price.toLocaleString('es-AR'),
           })); 
@@ -211,7 +227,7 @@ const VineContent = () => {
         const imagenes = await Promise.all(
             ProductosFiltrados.map(async ({ image }) => {
                 const rutaCompleta = `${image.replace(/'/g, '"')}`;
-                /* console.log('Ruta completa:', rutaCompleta); */
+               /*   console.log('Ruta completa:', rutaCompleta);  */
 
                 const imagen = await import(rutaCompleta).then((module) => module.default);
                 return imagen;
@@ -405,11 +421,12 @@ const VineContent = () => {
                                 spacing={{ base: 5, lg: 14 }}
                             >
                                 {ProductosFiltrados.map(
-                                    ({ image, text, subText, price, btnText, stock,  formattedPrice }, i) => (
+                                    ({ image, text, subText, price, btnText, stock,  formattedPrice, imagen2 }, i) => (
                                         <CustomWineCard
                                        /* image={image} */  /* ACTUALMENTE ESTÁ SUBIDO ESTE IMAGE */
                                         //NECESITAMOS EL image={imagenesCargadas[i]} DE ABAJO PARA QUE FUNCIONE LA CARGA DE PRODUCTOS DESDE EL BACK(Momentaneamente en desuso por desarrollo, no quitar.):                                 
-                                        image={imagenesCargadas[i]} 
+                                      /*   image={imagenesCargadas[i]}  */
+                                        image={imagen2} 
                                         key={i}
                                         text={text}
                                         subText={subText}

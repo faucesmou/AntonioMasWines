@@ -28,6 +28,8 @@ import { RiShoppingCartLine } from "react-icons/ri";
 import PaymentForm from "./PaymentForm";
 import { CartContext } from "../../App";
 
+/* import P2 from "../../assets/imgs/p2.png"; */
+
 const StickyCart = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -100,6 +102,7 @@ const StickyCart = () => {
       setCartState(newArray);
     } else if (action === "decrease") {
       console.log(cartState);
+     /*  console.log(P2); */
       let newArray = cartState.map((item) => {
         if (item.text === txt) {
           return { ...item, quantity: item.quantity - 1 };
@@ -209,7 +212,11 @@ const StickyCart = () => {
                     <Stack direction="row" mb="13px">
                       <Stack direction="row" fontWeight={600} fontSize="17px">
                         <Image
-                          src={item.image ? item.image : ""}
+
+                        /* ARREGLAR ESTA IMAGENNN: LA RUTA----------------> */
+
+
+                           src={item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : ""}
                           width="39px"
                           height="95px"
                           objectFit="cover"

@@ -166,7 +166,7 @@ const VineContent = () => {
 
         const wineCardData5 = await consultaProductos()
 
-        console.log('Este es el wineCardData5: -->', wineCardData5);
+        /* console.log('Este es el wineCardData5: -->', wineCardData5); */
 
         /*  let filteredProducts = [...wineCardData]; */
         /* emparejo la estructura de wineCardData5 a la que necesito para que sea leida correctamente: */
@@ -175,8 +175,10 @@ const VineContent = () => {
             product.price = parseFloat(product.price.replace('$', ''));
           });
 
-       /*  let filteredProducts = wineCardData5; */
-        let filteredProducts = wineCardData;
+         let filteredProducts = wineCardData5; 
+       /*  let filteredProducts = wineCardData; */ /* actualmente está subido ESTE WINE CAR DATA (ESTÁ FIJO) */
+
+
         console.log('estos son los filteredProducts: -->', filteredProducts);
         let pruebaDato = filteredProducts[0].price;
         typeof (pruebaDato)
@@ -405,9 +407,9 @@ const VineContent = () => {
                                 {ProductosFiltrados.map(
                                     ({ image, text, subText, price, btnText, stock,  formattedPrice }, i) => (
                                         <CustomWineCard
-                                       image={image} 
+                                       /* image={image} */  /* ACTUALMENTE ESTÁ SUBIDO ESTE IMAGE */
                                         //NECESITAMOS EL image={imagenesCargadas[i]} DE ABAJO PARA QUE FUNCIONE LA CARGA DE PRODUCTOS DESDE EL BACK(Momentaneamente en desuso por desarrollo, no quitar.):                                 
-                                      /*   image={imagenesCargadas[i]} */
+                                        image={imagenesCargadas[i]} 
                                         key={i}
                                         text={text}
                                         subText={subText}

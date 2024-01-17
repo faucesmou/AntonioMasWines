@@ -435,8 +435,8 @@ const filteredProducts2 = filteredProducts.map((item) => {
                                         key={i}
                                         text={text}
                                         subText={subText}
-                                        price={/* formattedPrice */
-                                        isNaN(price) ? 'Sin Stock' : price.toLocaleString('es-AR') 
+                                        price={
+                                        isNaN(price) ? 'Sin Stock' : `AR$${price.toLocaleString('es-AR')} `
                                         } 
                                         btnText={btnText}
                                         style={{ color: "black" }}

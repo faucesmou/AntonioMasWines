@@ -336,7 +336,7 @@ const StickyCart = () => {
               <Stack direction="column" gap={3} w="100%">
                 <Flex justify="space-between" fontWeight={600} fontSize="17px">
                   <Text>Subtotal</Text>
-                  <Text>${getTotalAmount().toLocaleString('es-AR')}</Text>
+                  <Text>AR${getTotalAmount().toLocaleString('es-AR')}</Text>
                 </Flex>
                 <Input
                   variant="flushed"

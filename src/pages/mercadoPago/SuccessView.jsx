@@ -58,19 +58,19 @@ const SuccessView = () => {
   const { formData, precioFinal, formDataCarrito, mensajeEstadoCompra } = responseData;
   const { nombreApellido, email, celular, cp, calle } = formData;
   console.log('nombreApellido:', nombreApellido, 'email:', email, 'celular:', celular, 'cp:', cp, 'calle:', calle,);
-  console.log('formDataCarrito2 es este------->>>> :', formDataCarrito2);
+ 
   console.log('formDataCarrito es este------->>>> :', formDataCarrito);
 
-  const getTotalAmount = () => {
+  const getTotalAmount = (formDataCarrito) => {
     /*  console.log('ejecutando el getTotalAmount. Este es el cartState:', cartState ); */
-    console.log('esta es el cartState2:--->', cartState2)
-     return formDataCarrito
-       .reduce((acc, item) => acc + /* parseFloat */Number(item.price) * item.quantity, 0)
+    /* console.log('esta es el cartState2:--->', cartState2) */
+     return formDataCarrito.reduce((acc, item) => acc + /* parseFloat */Number(item.price) * item.quantity, 0)
       /*  .toFixed(2) */;
    };
 
   const formDataCarrito2 = formDataCarrito.map((item) => {
     let imagen2;
+
     if (item.text === "Single Vineyard" /* && item.subText === "Chardonay (x6)" */) {
         imagen2 = P2; 
       } else if (item.text === "Single Vineyard") {
@@ -91,11 +91,9 @@ const SuccessView = () => {
      imagen2,
     };
 
-   
-   
        });
 
-
+       console.log('formDataCarrito2 es este------->>>> :', formDataCarrito2);
   return (
     <div>
       <Navbar />
@@ -124,7 +122,7 @@ const SuccessView = () => {
               </div>
             </div>
           ))}
-          <p>{/* Precio Final: AR${precioFinal} */} AR${getTotalAmount().toLocaleString('es-AR')}</p>
+          <p>{/* Precio Final: AR${precioFinal} */} AR${getTotalAmount(formDataCarrito).toLocaleString('es-AR')}</p>
         </div>
 
       </div>

@@ -62,10 +62,8 @@ const SuccessView = () => {
   console.log('formDataCarrito es este------->>>> :', formDataCarrito);
 
   const getTotalAmount = (formDataCarrito) => {
-    /*  console.log('ejecutando el getTotalAmount. Este es el cartState:', cartState ); */
-    /* console.log('esta es el cartState2:--->', cartState2) */
-     return formDataCarrito.reduce((acc, item) => acc + /* parseFloat */Number(item.price) * item.quantity, 0)
-      /*  .toFixed(2) */;
+     return formDataCarrito.reduce((acc, item) => acc + Number(item.price) * item.quantity, 0)
+      ;
    };
 
   const formDataCarrito2 = formDataCarrito.map((item) => {
@@ -83,9 +81,6 @@ const SuccessView = () => {
         imagen2 = A2;   
       }
 
-          /*   const rutaTransformada = item.image ? `/src/${item.image.replace(/^(\.\.\/){4}/, '')}` : ''; */
-            /* console.log('esta es la rutaTransformada: ', rutaTransformada); */
-          // Crea un nuevo objeto con imagen2 y las demás propiedades
    return {
      ...item,
      imagen2,
@@ -122,7 +117,7 @@ const SuccessView = () => {
               </div>
             </div>
           ))}
-          <p>{/* Precio Final: AR${precioFinal} */} AR${getTotalAmount(formDataCarrito).toLocaleString('es-AR')}</p>
+          <p>{/* Precio Final: AR${precioFinal} */} Precio Final: AR${getTotalAmount(formDataCarrito).toLocaleString('es-AR')}</p>
         </div>
 
       </div>

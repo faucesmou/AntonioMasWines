@@ -9,6 +9,12 @@ import {Box,Button,Divider,Drawer,DrawerBody,DrawerCloseButton,DrawerContent,Dra
 import Footer from "../../components/footer";
 import CustomWineCard from "./custom-wine-card/index";
 
+import P1 from "../../assets/imgs/p1.png"; 
+import P2 from "../../assets/imgs/p2.png"; 
+import P3 from "../../assets/imgs/p3.png"; 
+import S1 from "../../assets/imgs/s1.png"; 
+import A1 from "../../assets/imgs/amarada1002.png"; 
+import A2 from "../../assets/imgs/AlmaradaCavernetSinFondo.png";
 
 const FailureView = () => {
 
@@ -52,6 +58,37 @@ const FailureView = () => {
   const { nombreApellido, email, celular, cp, calle } = formData;
   console.log('nombreApellido:', nombreApellido, 'email:', email, 'celular:', celular, 'cp:', cp, 'calle:', calle,);
 
+  console.log('formDataCarrito es este------->>>> :', formDataCarrito);
+
+  const getTotalAmount = (formDataCarrito) => {
+    return formDataCarrito.reduce((acc, item) => acc + Number(item.price) * item.quantity, 0)
+     ;
+  };
+
+  const formDataCarrito2 = formDataCarrito.map((item) => {
+    let imagen2;
+
+    if (item.text === "Single Vineyard" /* && item.subText === "Chardonay (x6)" */) {
+        imagen2 = P2; 
+      } else if (item.text === "Single Vineyard") {
+        imagen2 = P1; 
+      } else if (item.text === "Núcleo3"){
+        imagen2 = P3;
+      } else if (item.text === "Single Vineyard"){
+        imagen2 = S1;
+      } else if (item.text === "Almarada"){
+        imagen2 = A2;   
+      }
+
+   return {
+     ...item,
+     imagen2,
+    };
+
+       });
+
+       console.log('formDataCarrito2 es este------->>>> :', formDataCarrito2);
+
   return (
     <div>
       <Navbar />
@@ -69,9 +106,9 @@ const FailureView = () => {
 
         <div className="purchase-details">
           <p>Detalle de la compra: </p>
-          {formDataCarrito.map((producto) => (
+          {formDataCarrito2.map((producto) => (
            <div key={producto.compraCarritoId} className="product-item">
-               <img src={producto.image} alt={producto.text} />
+               <img src={producto.imagen2} alt={producto.text} />
               <div className="product-details">
                 <p>Nombre: {producto.text}</p>
                 <p>Precio: {producto.price}</p>
@@ -79,7 +116,7 @@ const FailureView = () => {
               </div>
             </div>
           ))}
-          <p>Precio Final: {precioFinal}</p>
+          <p>Precio Final: AR${getTotalAmount(formDataCarrito).toLocaleString('es-AR')}</p>
         </div>
 
       </div>

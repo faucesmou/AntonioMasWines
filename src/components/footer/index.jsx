@@ -42,7 +42,7 @@ const Footer = ({ position = "static" }) => {
   };
 
   const [formData3, setFormData3] = useState({
-    email: ""
+    correo: ""
   });
   
   const [formSubmitted, setFormSubmitted] = useState(false);
@@ -61,18 +61,18 @@ const Footer = ({ position = "static" }) => {
 
   const validateForm = () => {
     const validationErrors = {};
-    if (formData3.email.trim() === "") {
-      validationErrors.email = "El Email es requerido";
+    if (formData3.correo.trim() === "") {
+      validationErrors.correo = "El Email es requerido";
     }
-    if (!isValidEmail(formData3.email) && formData3.email.trim() != "" ) {
-      validationErrors.email = "Formato de Email inválido";
+    if (!isValidEmail(formData3.correo) && formData3.correo.trim() != "" ) {
+      validationErrors.correo = "Formato de Email inválido";
     }
     return validationErrors;
   };
 
-  const isValidEmail = (email) => {    
+  const isValidEmail = (correo) => {    
     let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
+    return re.test(correo);
   };
 
   const handleSubmit = async () => {
@@ -85,7 +85,7 @@ const Footer = ({ position = "static" }) => {
       console.log(response.data);
       setFormSubmitted(true);
       setFormData3({
-        email: ""
+        correo: ""
       });
       setErrors({});
     } catch (error) {
@@ -112,7 +112,7 @@ const Footer = ({ position = "static" }) => {
         spacing={5}
       >
         <Flex direction="column" fontSize="17px" color="bgLight" gap={3}>
-          <Text as="h4" fontWeight={600} fontSize="20px">
+          <Text as="h4" fontWeight={600} fontSize="20px" >
             ¡Sigamos en contacto!
           </Text>
           <InputGroup fontWeight={300}>
@@ -122,20 +122,20 @@ const Footer = ({ position = "static" }) => {
               borderBottom="2px solid"
               borderBottomColor="bgLight"
               _placeholder={{ fontWeight: 300, color: "bgLight" }}
-              value={formData3.email}
+              value={formData3.correo}
               onChange={(event) =>
                 setFormData3((prevData) => ({
                   ...prevData,
-                  email: event.target.value, // Actualiza el campo "nombre" en formData3
+                  correo: event.target.value, // Actualiza el campo "nombre" en formData3
                 }))
               }
             />   
             <InputRightElement>
               <Text as="h5"
-              onClick={handleSubmit}>Enviar</Text>
+              onClick={handleSubmit} _hover={{ cursor: "pointer" }} >Enviar</Text>
             </InputRightElement>
           </InputGroup>
-              {errors.email && <span>{errors.email}</span>}      
+              {errors.correo && <span>{errors.correo}</span>}      
         </Flex>
         <Stack direction="column" align="flex-end">
           {/* <Image src={Logo} /> */}

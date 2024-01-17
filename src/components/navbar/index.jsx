@@ -63,7 +63,8 @@ const Navbar = () => {
             h="38px"
             color="bgLight"
             bg="none"
-            _hover={{ background: "none" }}
+          /*   _hover={{ background: "none" }} */
+            _hover={{ cursor: "pointer" }}
           />
           <Drawer
             zIndex={999}

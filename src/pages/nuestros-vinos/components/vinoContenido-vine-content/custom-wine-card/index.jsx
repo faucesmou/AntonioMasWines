@@ -27,6 +27,7 @@ const CustomWineCard = ({
           height="fit-content"
           className={isHovered ? 'hovered-image' : ''}
           transition="transform 0.3s ease-in-out"
+          _hover={{ cursor: "pointer" }}
         />
         <Stack
           direction="column"

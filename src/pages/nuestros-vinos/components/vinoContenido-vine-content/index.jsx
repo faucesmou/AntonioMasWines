@@ -352,6 +352,7 @@ const VineContent = () => {
                       btnText={btnText}
                       onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
                       onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                     
                       isHovered={singleVineyardHoveredIndex === i}
                     >
                       {/* -------------------------> ACÁ HAY UN PROBLEMA PARA AJUSTAR LAS IMAGENES, AL USAR STYLE NO SE CARGAN <img
@@ -376,6 +377,7 @@ const VineContent = () => {
           // Ajustamos los márgenes para separar el contenedor de "Chardonnay" del centro
           marginLeft={{ base: "10px", md: "20px", lg: "15px" }}
           mt={10} // Espacio arriba del título
+          
         >
           <Heading
             fontStyle="italic"
@@ -398,11 +400,13 @@ const VineContent = () => {
               <SimpleGrid
                 columns={{ base: 1, md: 2, lg: 3 }}
                 spacing={{ base: 5, lg: 14 }}
+                /* _hover={{ cursor: "pointer" }} */
               >
                 {nucleoData.map(
                   ({ image, text, subText, price, btnText }, i) => (
                     <CustomWineCard
                       image={image}
+                     
                       key={i}
                       onAddToCart={() => {}}
                       text={text}

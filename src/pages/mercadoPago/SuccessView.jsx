@@ -10,12 +10,12 @@ import Footer from "../../components/footer";
 import CustomWineCard from "./custom-wine-card/index";
 
 
-import P1 from "../../../../assets/imgs/p1.png"; 
-import P2 from "../../../../assets/imgs/p2.png"; 
-import P3 from "../../../../assets/imgs/p3.png"; 
-import S1 from "../../../../assets/imgs/s1.png"; 
-import A1 from "../../../../assets/imgs/amarada1002.png"; 
-import A2 from "../../../../assets/imgs/AlmaradaCavernetSinFondo.png";  
+import P1 from "../../assets/imgs/p1.png"; 
+import P2 from "../../assets/imgs/p2.png"; 
+import P3 from "../../assets/imgs/p3.png"; 
+import S1 from "../../assets/imgs/s1.png"; 
+import A1 from "../../assets/imgs/amarada1002.png"; 
+import A2 from "../../assets/imgs/AlmaradaCavernetSinFondo.png";  
 
 const SuccessView = () => {
 

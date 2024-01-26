@@ -37,6 +37,7 @@ import H2 from "../../../../assets/imgs/h2.png";
 import H3 from "../../../../assets/imgs/h3.png";
 import E1 from "../../../../assets/imgs/Elisir.png";
 import imagenBoton from "../../../../assets/imgs/action-btn.png";
+import PaymentForm from "../../../../components/sticky-cart/PaymentForm";
 
 /* import P2 from "../../../../assets/imgs/p2.png";
 import P3 from "../../../../assets/imgs/p3.png";
@@ -84,8 +85,8 @@ const ratingItems = [
 const singleVineyard = [
   {
     image: S1,
-    text: "",
-    subText: "",
+    text: "Single Vineyard",
+    subText: "TIEMPO EN BARRICAS 6 meses en barrica usada para perseverar la frescura de la fruta y la pureza del terroir. NOTAS DE CATA  VISTA: NARIZ: Aromas intensos de ciruela.  BOCA: Se combinan los amables taninos con sabores de arándanos secos y chocolate con cáscara de naranja. Gran balance y complejidad.",
     price: "",
     btnText: "Añadir al carrito",
   },
@@ -185,8 +186,11 @@ const espumanteData = [
 
 const VineContent = () => {
   const toast = useToast();
-
-  const { cartState, setCartState } = useContext(CartContext);
+  
+  //código para desplegar el primer formulario de compra:
+  const [isDescripcionVinoOpen, setIsDescripcionVinoOpen] = useState(false);
+/* 
+  const { cartState, setCartState } = useContext(CartContext); */
 
   /* hovers para que las botellas se agranden  */
   const [singleVineyardHoveredIndex, setSingleVineyardHoveredIndex] = useState(null);
@@ -195,7 +199,9 @@ const VineContent = () => {
   const [historiaHoveredIndex, setHistoriaHoveredIndex] = useState(null);
   const [espumanteHoveredIndex, setEspumanteHoveredIndex] = useState(null);
 
-  const { isOpen, onOpen } = useDisclosure(); 
+ 
+  const { isOpen, onOpen, onClose } = useDisclosure(); 
+  
   const handleOpenAndScroll = () => {
     onOpen();
     setTimeout(() => {
@@ -206,9 +212,65 @@ const VineContent = () => {
     }, 100); // Espera 100ms antes de desplazarte
   }; 
 
+//funciones para activar el Modal de descripción: 
 
+  const handleOpenDescripcionVino = () => {
+    console.log('se tocó el handleOpenDescripcionVino');
+    setIsDescripcionVinoOpen(true);
+    onOpen();
+  };
 
-  const addToCart = (image, text, price) => {
+  const handleCloseDescripcionVino = () => {
+    console.log('se tocó el handleCloseDescripcionVino');
+    setIsDescripcionVinoOpen(false);
+  };
+
+    //Estilos en línea para el formulario paymentForm:
+    const modalStyles = {
+      position: "fixed",
+      top: 0,
+      left: 0,
+      width: "100%",
+      height: "100%",
+      backgroundColor: "rgba(0, 0, 0, 0.5)", // Fondo semitransparente
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      zIndex: 999, // Asegura que esté por encima del carrito
+      margin: "auto",
+      overflowY: "auto",
+  
+      /*  maxHeight: "80", */
+    };
+    //Estilos en línea para el modal Descripcion Vino:
+    const modalContentStyles = {
+      backgroundColor: "bgLight",
+      padding: "10px",
+      boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+      maxWidth: "100%", // Cambia el ancho según tus necesidades
+      display: "flex",
+      flexDirection: "column",
+      borderRadius: "30px",
+    };
+  
+    const cancelButtonStyles = {
+      fontSize: "14px" /* Reduce el tamaño de fuente */,
+      padding:
+        "10px 20px" /* Ajusta el espaciado interior para achicar el botón */,
+      border: "1px solid #4F4F4F",
+      borderRadius:
+        "30px" /* Ajusta el radio del borde para hacerlo más pequeño */,
+      background: "rgba(0, 0, 0, 0.5)",
+      fontWeight: 200,
+      width: "auto",
+      color: "#ffff",
+      height: "40%" /* Reduce la altura del botón */,
+      margin: "auto" /* Centra el botón horizontalmente */,
+      display: "flex",
+      alignItems: "center",
+    };
+
+/*   const addToCart = (image, text, price) => {
     const foundItem = cartState.filter((item) => item.text === text)[0];
 
     if (foundItem) {
@@ -268,7 +330,7 @@ const VineContent = () => {
 
     if (item) return item.quantity * item.price;
     return 9.0;
-  };
+  }; */
 
   return (
     <Box bg="black" position="relative">
@@ -339,6 +401,7 @@ const VineContent = () => {
               <SimpleGrid
                 columns={{ base: 1, md: 2, lg: 3 }}
                 spacing={{ base: 5, lg: 14 }}
+                /* onClick={handleOpenDescripcionVino} */
               >
                 {singleVineyard.map(
                   ({ image, text, subText, price, btnText }, i) => (
@@ -352,18 +415,16 @@ const VineContent = () => {
                       btnText={btnText}
                       onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
                       onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                      /* onClick={handleOpenDescripcionVino} */
                      
                       isHovered={singleVineyardHoveredIndex === i}
                     >
-                      {/* -------------------------> ACÁ HAY UN PROBLEMA PARA AJUSTAR LAS IMAGENES, AL USAR STYLE NO SE CARGAN <img
-            className="photo"
-            src={image}
-            style={{ maxWidth: "202px", maxHeight: "499px" }}
-          /> */}
+                    
                     </CustomWineCard>
                   )
                 )}
               </SimpleGrid>
+             
             </Box>
           </Flex>
         </Flex>
@@ -416,10 +477,13 @@ const VineContent = () => {
                       onMouseEnter={() => setNucleoHoveredIndex(i)}
                       onMouseLeave={() => setNucleoHoveredIndex(null)}
                       isHovered={nucleoHoveredIndex === i}
+                      onClick={handleOpenDescripcionVino}
                     />
                   )
-                )}
+                  )}
+                  
               </SimpleGrid>
+              
             </Box>
           </Flex>
         </Flex>
@@ -591,7 +655,7 @@ const VineContent = () => {
           </Flex>
         </Flex>
 
-        {/* Contenedor del Boton "ver todos los vinos" */}
+        {/* Contenedor del Boton "Ver tienda Online" */}
         <Flex
           direction="column"
           gap={4}

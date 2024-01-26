@@ -119,7 +119,7 @@ const StickyCart = () => {
           })
           );
           setImagenesCargadas(imagenes);
-          console.log('imagenesCargadas:', imagenesCargadas); 
+         
           /* esta funcion NO FUNCIONA */
       };
       
@@ -156,7 +156,7 @@ const StickyCart = () => {
 
   const getTotalAmount = () => {
    /*  console.log('ejecutando el getTotalAmount. Este es el cartState:', cartState ); */
-   console.log('esta es el cartState2:--->', cartState2)
+   
     return cartState
       .reduce((acc, item) => acc + /* parseFloat */Number(item.price) * item.quantity, 0)
      /*  .toFixed(2) */;
@@ -208,8 +208,7 @@ const StickyCart = () => {
       console.error("Error al activar el controlador: ", error);
     }
   };
-  console.log('ESTE ESTE ESTE es el cartState2:--->', cartState2);
-  console.log('ESTE ESTE ESTE es el cartState:--->', cartState);
+
   return (
     <Box>
       <Box

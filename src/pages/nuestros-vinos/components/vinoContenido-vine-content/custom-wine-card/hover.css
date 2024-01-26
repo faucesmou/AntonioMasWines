@@ -1,7 +1,7 @@
 /* Estilos de hover para las imágenes */
 .hovered-image {
     transform: scale(1.1);
-    filter: brightness(120%) contrast(125%) saturate(125%);
+    filter: brightness(100%) contrast(100%) saturate(100%);
     /* Puedes ajustar los valores de brightness, contrast y saturate según tus preferencias */
   }
   

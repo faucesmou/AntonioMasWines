@@ -1,6 +1,7 @@
 import Navbar from "../../components/navbar";
 /* import HeroSection from "./components/nuestrosVinosHero/NuestrosVinosHero"; */
-import VineContent from "./components/vinoContenido-vine-content";
+import VineContent from "./components/vinoContenido-vine-content/VineContent";
+import VineContent2 from "./components/vinoContenido-vine-content/VineContent2";
 import Wines from "../landing/components/wines";
 const NuestrosVinos = () => {
   return (
@@ -8,7 +9,7 @@ const NuestrosVinos = () => {
       <Navbar />
       {/*  <Wines /> */}
     {/*   <HeroSection /> */}
-      <VineContent />
+      <VineContent2 />
      
     </>
   );

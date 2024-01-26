@@ -194,7 +194,7 @@ const DescripcionVino2 = ({ image, text, subText, price, pdfFileName, onClose, v
                 <img src={image} alt={text} />
               </div>
               <div className="text-container-descripcionVino">
-                <div className="wine-text-descripcionVino">{text}</div>
+                <div className="wine-titulo-descripcionVino">{text}</div>
                 <div className="subText">{subText}</div>
                 <div className="wine-price-descripcionVino">AR${price ? price.toLocaleString('es-AR') : 'Precio no disponible'}</div>
               </div>

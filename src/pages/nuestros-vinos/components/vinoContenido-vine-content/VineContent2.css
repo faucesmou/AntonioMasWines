@@ -18,7 +18,6 @@
 
 .flex-container {
   display: flex;
-  
 }
 
 .content-container {
@@ -99,8 +98,10 @@
   margin-top: 40px;
 }
 
+
+
 .wine-card-espumante {
-  width: 35%; /* o el porcentaje que prefieras */
+  width: 35%; 
   height: auto;
 }
 
@@ -121,19 +122,28 @@
 
 
 /* Estilos de los contenedores de productos para dispositivos móviles */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
+
   .product-container {
     width: 100%;
     margin-right: 0;
     margin-top: 10px;
   }
 
+  .flex-container {
+    flex-wrap: wrap;
+  }
   .wine-card {
-    width: calc(50% - 8px);
+   width: calc(30.33% - 8px); 
+   margin-bottom: 8px;
+   align-items: center;
+   margin-top: 40px;
+   margin-left: 0%;
+   margin-right: 0%;
   }
 
   .wine-card-espumante {
-    width: 40%; /* o el porcentaje que prefieras */
+    width: 40%; 
     height: auto;
   }
 
@@ -141,14 +151,41 @@
     font-size: 24px;
   }
 
+  .divider {
+    margin-top: 4%;
+    margin-bottom: 5%;
+  }
+
   .main-title {
-    font-size: 50px; /* Puedes ajustar este valor según tus necesidades */
+    font-size: 50px; 
     text-align: center;
   }
 }
 
+@media only screen and (max-width: 280px) {
 
- /* Estilos del componente DescripcionVino2 */
+  .wine-card {
+   width: 100%; 
+   margin-top: 40px;
+   margin-left: 0%;
+   margin-right: 0%;
+
+  }
+
+  .divider {
+    margin-top: 4%;
+    margin-bottom: 22%;
+  }
+  .hovered-image {
+    transform: scale(1.00);
+    filter: brightness(100%) contrast(100%) saturate(100%);
+    /* Puedes ajustar los valores de brightness, contrast y saturate según tus preferencias */
+  }
+}
+
+
+
+ /* Estilos del componente DescripcionVino2 ---------------->>> */
 
 
 .contenedor-principal-descripcionVino {
@@ -294,6 +331,8 @@ img {
   border-top: 1px solid #0b0b0b;
 }
 
+
+
 /* Estilos para el contenedor del boton "Descargar ficha técnica" */
 .button-container {
   display: flex;
@@ -357,7 +396,6 @@ img {
 
   .subText {
     font-size: 12px;
-     
   }
 
   .wine-price-descripcionVino {
@@ -382,13 +420,20 @@ img {
 }
 
 @media only screen and (max-width: 600px) {
+
+
+
   .wine-card-descripcionVino {
     flex-direction: column;
     justify-content: center;
   }
 
   .info-heading-descripcionVino {
-    font-size: 5vw; 
+    font-size: 6vw; 
+  }
+
+  .subText {
+    font-size: 12px;
   }
 
   .image-container-descripcionVino {
@@ -396,6 +441,65 @@ img {
     margin: auto; 
     object-fit: contain;
     margin-top: 4%;
+  }
+  .wine-titulo-descripcionVino {
+    font-size: 5vw;
+    font-family: 'Playfair Display', serif;
+    }
+
+  .text-container-descripcionVino {
+    width: 100%;
+  }
+
+  .wine-price-descripcionVino {
+    margin-right: 10%;
+    margin-left: 10%;
+    font-size: 11px;
+  }
+
+  .descargarFicha-button {
+    padding: 5px 10px; 
+    font-size: 11px; 
+}
+}
+
+@media only screen and (max-width: 300px) {
+
+  .custom-modal-descripcionVino {
+    width: 80%;
+    margin: 5%;
+    overflow-y: auto;
+    max-height: 60vh;
+  }
+  
+  .wine-card-descripcionVino {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .info-heading-descripcionVino {
+    font-size: 6vw; 
+  }
+
+  .subText {
+    font-size: 10px;
+     
+  }
+
+  .wine-titulo-descripcionVino {
+    font-size: 4vw;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px; 
+    margin-top: 10px;
+    height: 10%;
+    border-bottom: 1px solid #0b0b0b; 
+    }
+
+  .image-container-descripcionVino {
+    width: 40%;
+    margin: auto; 
+    object-fit: contain;
+    margin-top: 12%;
   }
 
   .text-container-descripcionVino {

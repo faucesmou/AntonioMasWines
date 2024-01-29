@@ -1,6 +1,8 @@
 import { Box, Button, Flex, Image, Stack, Text } from "@chakra-ui/react";
 import { ActionButton } from "../../../../../components/button";
 
+
+
 const CustomWineCard = ({
   onAddToCart,
   image,
@@ -43,7 +45,7 @@ const CustomWineCard = ({
             fontSize="14px"
             fontWeight={400}
             lineHeight="16px"
-            onClick={onAddToCart}
+           /*  onClick={onAddToCart} */
             width="fit-content"
             _hover={{ backgroundColor: "#fff", transform: "scale(1.1)" }}
           >

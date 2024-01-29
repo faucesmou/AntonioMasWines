@@ -19,6 +19,9 @@ const CustomWineCard = ({
   isHovered,
 }) => {
 
+  const [singleVineyardHoveredIndex, setSingleVineyardHoveredIndex] = useState(null);
+  const [nucleoHoveredIndex, setNucleoHoveredIndex] = useState(null);
+
   //funciones para activar el Modal de descripción: 
   const [isDescripcionVinoOpen, setIsDescripcionVinoOpen] = useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -64,12 +67,13 @@ const CustomWineCard = ({
           width={{ base: "150px", lg: "100%" }}
           objectFit="contain"
           height="cover"
-          maxHeight="350px"
+          maxHeight="300px"
           maxWidth="200px" 
           className={isHovered ? 'hovered-image' : ''}
           transition="transform 0.3s ease-in-out"
           _hover={{ cursor: "pointer" }}
           onClick={handleOpenDescripcionVino}
+          
         />
         <Stack
           direction="column"

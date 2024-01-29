@@ -21,6 +21,7 @@ import {
   Text,
   useDisclosure,
   useToast,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import S1 from "../../../../assets/imgs/s1.png";
@@ -59,7 +60,8 @@ import Rating from "./rating";
 import CustomWineCard from "./custom-wine-card";
 import Footer from "../../../../components/footer";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper";
+/* import { Autoplay } from "swiper"; */
+import SwiperCore, { Autoplay } from 'swiper';
 import { useContext, useState } from "react";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { CartContext } from "../../../../App";
@@ -205,6 +207,11 @@ const espumanteData = [
 ];
 
 const VineContent2 = () => {
+
+  SwiperCore.use([Autoplay]);
+const [isSmallScreen] = useMediaQuery('(max-width: 300px)');
+const [isSmallScreen2] = useMediaQuery('(max-width: 300px)');
+
   const toast = useToast();
 
   //código para desplegar el primer formulario de compra:
@@ -235,13 +242,11 @@ const VineContent2 = () => {
   //funciones para activar el Modal de descripción: 
 
   const handleOpenDescripcionVino = () => {
-    console.log('se tocó el handleOpenDescripcionVino');
     setIsDescripcionVinoOpen(true);
     onOpen();
   };
 
   const handleCloseDescripcionVino = () => {
-    console.log('se tocó el handleCloseDescripcionVino');
     setIsDescripcionVinoOpen(false);
   };
 
@@ -311,8 +316,70 @@ const VineContent2 = () => {
           Single Vineyard
         </h2>
         <hr className="divider" />
-        {/* ... Código existente */}
-        <div className="flex-container">
+          {/* ... Código existente */}
+          {/* Verifica si estás en una pantalla pequeña antes de decidir usar el Swiper */}
+          {isSmallScreen ? (
+            <div className="flex-container">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={20}
+              grabCursor={true}
+              loop={true}
+              autoplay={{
+                delay: 10000,
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true,
+                waitForTransition: true,
+              }}
+            >
+              
+              {singleVineyard.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
+                <SwiperSlide key={i}>
+                  <CustomWineCard
+                    image={image}
+                    key={i}
+                    text={text}
+                    subText={subText}
+                    price={price}
+                    pdfFileName={pdfFileName}
+                    variedad={variedad}
+                    onAddToCart={() => { }}
+                    onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
+                    onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                    isHovered={singleVineyardHoveredIndex === i}
+                  />
+                </SwiperSlide>
+              ))}
+            
+            </Swiper>
+            </div>
+          ) : (
+            // Si no estás en una pantalla pequeña, renderiza la lista estándar
+            <div className="flex-container">
+              {singleVineyard.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
+                <div className="wine-card" key={i}>
+                  <CustomWineCard
+                    image={image}
+                    key={i}
+                    text={text}
+                    subText={subText}
+                    price={price}
+                    pdfFileName={pdfFileName}
+                    variedad={variedad}
+                    onAddToCart={() => { }}
+                    onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
+                    onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                    isHovered={singleVineyardHoveredIndex === i}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+    
+    
+
+
+        {/* <div className="flex-container">
           {singleVineyard.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
             <div className="wine-card" key={i}>
               <CustomWineCard
@@ -330,7 +397,7 @@ const VineContent2 = () => {
               />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Contenedor para vinos Núcleo */}
@@ -339,27 +406,65 @@ const VineContent2 = () => {
           Núcleo
         </h2>
         <hr className="divider" />
-        {/* ... Código existente */}
-        <div className="flex-container">
-          {nucleoData.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
-            <div className="wine-card" key={i}>
-              <CustomWineCard
-                image={image}
-                key={i}
-                text={text}
-                subText={subText}
-                price={price}
-                pdfFileName={pdfFileName}
-                variedad={variedad}
-                onAddToCart={() => { }}
-                onMouseEnter={() => setNucleoHoveredIndex(i)}
-                onMouseLeave={() => setNucleoHoveredIndex(null)}
-                isHovered={nucleoHoveredIndex === i}
-              />
+         {/* Verifica si estás en una pantalla pequeña antes de decidir usar el Swiper */}
+         {isSmallScreen2 ? (
+            <div className="flex-container">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={20}
+              grabCursor={true}
+              loop={true}
+              autoplay={{
+                delay: 10000,
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true,
+                waitForTransition: true,
+              }}
+            >
+              
+              {nucleoData.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
+                <SwiperSlide key={i}>
+                  <CustomWineCard
+                    image={image}
+                    key={i}
+                    text={text}
+                    subText={subText}
+                    price={price}
+                    pdfFileName={pdfFileName}
+                    variedad={variedad}
+                    onAddToCart={() => { }}
+                    onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
+                    onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                    isHovered={singleVineyardHoveredIndex === i}
+                  />
+                </SwiperSlide>
+              ))}
+            
+            </Swiper>
             </div>
-          ))}
+          ) : (
+            // Si no estás en una pantalla pequeña, renderiza la lista estándar
+            <div className="flex-container">
+              {nucleoData.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
+                <div className="wine-card" key={i}>
+                  <CustomWineCard
+                    image={image}
+                    key={i}
+                    text={text}
+                    subText={subText}
+                    price={price}
+                    pdfFileName={pdfFileName}
+                    variedad={variedad}
+                    onAddToCart={() => { }}
+                    onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
+                    onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                    isHovered={singleVineyardHoveredIndex === i}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
       </div>
 
        {/* Contenedor para vinos Single Vineyard y Núcleo */}
@@ -370,8 +475,70 @@ const VineContent2 = () => {
           Almarada
         </h2>
         <hr className="divider" />
+{/* Verifica si estás en una pantalla pequeña antes de decidir usar el Swiper */}
+{isSmallScreen2 ? (
+            <div className="flex-container">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={20}
+              grabCursor={true}
+              loop={true}
+              autoplay={{
+                delay: 10000,
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true,
+                waitForTransition: true,
+              }}
+            >
+              
+              {almaradaData.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
+                <SwiperSlide key={i}>
+                  <CustomWineCard
+                    image={image}
+                    key={i}
+                    text={text}
+                    subText={subText}
+                    price={price}
+                    pdfFileName={pdfFileName}
+                    variedad={variedad}
+                    onAddToCart={() => { }}
+                    onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
+                    onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                    isHovered={singleVineyardHoveredIndex === i}
+                  />
+                </SwiperSlide>
+              ))}
+            
+            </Swiper>
+            </div>
+          ) : (
+            // Si no estás en una pantalla pequeña, renderiza la lista estándar
+            <div className="flex-container">
+              {almaradaData.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
+                <div className="wine-card" key={i}>
+                  <CustomWineCard
+                    image={image}
+                    key={i}
+                    text={text}
+                    subText={subText}
+                    price={price}
+                    pdfFileName={pdfFileName}
+                    variedad={variedad}
+                    onAddToCart={() => { }}
+                    onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
+                    onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                    isHovered={singleVineyardHoveredIndex === i}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
+
+
+
         {/* ... Código existente */}
-        <div className="flex-container">
+        {/* <div className="flex-container">
           {almaradaData.map(({ image, text, subText, price, btnText, variedad, pdfFileName }, i) => (
             <div className="wine-card" key={i}>
               <CustomWineCard
@@ -389,7 +556,7 @@ const VineContent2 = () => {
               />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
 
       {/* Contenedor para vinos Núcleo */}
@@ -398,8 +565,71 @@ const VineContent2 = () => {
           Historia
         </h2>
         <hr className="divider" />
+
+        {isSmallScreen2 ? (
+            <div className="flex-container">
+            <Swiper
+              modules={[Autoplay]}
+              spaceBetween={20}
+              grabCursor={true}
+              loop={true}
+              autoplay={{
+                delay: 10000,
+                disableOnInteraction: true,
+                pauseOnMouseEnter: true,
+                waitForTransition: true,
+              }}
+            >
+              
+              {historiaData.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
+                <SwiperSlide key={i}>
+                  <CustomWineCard
+                    image={image}
+                    key={i}
+                    text={text}
+                    subText={subText}
+                    price={price}
+                    pdfFileName={pdfFileName}
+                    variedad={variedad}
+                    onAddToCart={() => { }}
+                    onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
+                    onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                    isHovered={singleVineyardHoveredIndex === i}
+                  />
+                </SwiperSlide>
+              ))}
+            
+            </Swiper>
+            </div>
+          ) : (
+            // Si no estás en una pantalla pequeña, renderiza la lista estándar
+            <div className="flex-container">
+              {historiaData.map(({ image, text, subText, price, btnText, pdfFileName, variedad }, i) => (
+                <div className="wine-card" key={i}>
+                  <CustomWineCard
+                    image={image}
+                    key={i}
+                    text={text}
+                    subText={subText}
+                    price={price}
+                    pdfFileName={pdfFileName}
+                    variedad={variedad}
+                    onAddToCart={() => { }}
+                    onMouseEnter={() => setSingleVineyardHoveredIndex(i)}
+                    onMouseLeave={() => setSingleVineyardHoveredIndex(null)}
+                    isHovered={singleVineyardHoveredIndex === i}
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+
+
+
+
+
         {/* ... Código existente */}
-        <div className="flex-container">
+        {/* <div className="flex-container">
           {historiaData.map(({ image, text, subText, price, btnText, variedad, pdfFileName }, i) => (
             <div className="wine-card" key={i}>
               <CustomWineCard
@@ -417,7 +647,7 @@ const VineContent2 = () => {
               />
             </div>
           ))}
-        </div>
+        </div> */}
       </div>
       </div>
 

@@ -24,6 +24,12 @@ import H1 from "../../../../../../assets/imgs/h1.png";
 import H2 from "../../../../../../assets/imgs/h2.png";
 import H3 from "../../../../../../assets/imgs/h3.png";
 
+
+
+/* import almaradaMalbec from "../../../../assets/imgs/mejorImagen/almaradaMalbec.png"; */
+import almaradaMalbec from "../../../../../../assets/imgs/mejorImagen/almaradaMalbec.png";
+import almaradaCabernet from "../../../../../../assets/imgs/mejorImagen/almaradaCabernet.png";
+
 import "swiper/css/navigation";
 import "./res-styles.css";
 
@@ -141,11 +147,11 @@ const ResponsiveWines = () => {
                 }}
                 alignSelf="center"
                 {...style}
-                opacity={0.5}
+              
               >
                 Núcleo
               </Heading>
-              <SimpleGrid align="start" gap={0} columns={2}>
+              <SimpleGrid align="start" gap={0} columns={4}>
                 <Box
                   position="relative"
                   _hover={{ transform: "scale(1.05)" }}
@@ -156,7 +162,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={N1}
                     style={{
-                      filter: 'brightness(100%) contrast(130%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(110%) contrast(190%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in">
@@ -173,7 +179,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={N2}
                     style={{
-                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(90%) contrast(190%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in">
@@ -190,7 +196,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={N3}
                     style={{
-                      filter: 'brightness(120%) contrast(150%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(110%) contrast(190%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in">
@@ -207,7 +213,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={N1}
                     style={{
-                      filter: 'brightness(100%) contrast(130%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(110%) contrast(190%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in">
@@ -222,12 +228,12 @@ const ResponsiveWines = () => {
               <Heading
                 fontSize={{ base: "60px", md: "50px", lg: "70px", xl: "100px" }}
                 {...style}
-                opacity={0.5}
+             
               >
                 Almarada
               </Heading>
 
-              <SimpleGrid align="start" gap={0} columns={1}>
+              <SimpleGrid align="start" gap={0} columns={2}>
                 <Box
                   position="relative"
                   _hover={{ transform: "scale(1.05)" }}
@@ -238,7 +244,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={A1}
                     style={{
-                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(130%) contrast(180%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in">
@@ -255,7 +261,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={A2}
                     style={{
-                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(130%) contrast(180%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in">
@@ -270,12 +276,12 @@ const ResponsiveWines = () => {
               <Heading
                 fontSize={{ base: "60px", md: "50px", lg: "70px", xl: "100px" }}
                 {...style}
-                opacity={0.5}
+               
               >
                 Historia
               </Heading>
 
-              <SimpleGrid align="start" gap={0} columns={2}>
+              <SimpleGrid align="start" gap={0} columns={3}>
                 <Box
                   position="relative"
                   _hover={{ transform: "scale(1.05)" }}
@@ -286,7 +292,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={H1}
                     style={{
-                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(110%) contrast(190%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in">
@@ -303,7 +309,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={H2}
                     style={{
-                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(110%) contrast(190%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in">
@@ -320,7 +326,7 @@ const ResponsiveWines = () => {
                     {...bottlesStyles}
                     src={H3}
                     style={{
-                      filter: 'brightness(100%) contrast(150%)', // Ajusta los valores según tus preferencias
+                      filter: 'brightness(110%) contrast(190%)', // Ajusta los valores según tus preferencias
                     }}
                   />
                   <Box transition="all .1s ease-in" >

@@ -47,7 +47,7 @@ const plusIconStyles = {
 
 const bottlesStyles = {
   width: "90px",
-  height: "222px",
+  height: "225px",
 };
 
 const style = {
@@ -80,14 +80,14 @@ const ResponsiveWines = () => {
       <Box>
         <Swiper grabCursor={true} modules={[Navigation]} navigation>
           <SwiperSlide>
-            <Flex direction={{ base: "column" }} gap={4}>
+            <Flex direction={{ base: "column" }} gap={0}>
               <Heading
                 zIndex={2}
                 {...style}
                 textAlign={{ base: "center" }}
-                fontSize={{ base: "60px", md: "50px", lg: "70px", xl: "100px" }}
+                fontSize={{ base: "42px", md: "50px", lg: "70px", xl: "100px" }}
               >
-                Single <br /> Vineyard
+                Single  Vineyard
               </Heading>
 
               <HStack flexWrap="wrap" justify="center">
@@ -140,7 +140,7 @@ const ResponsiveWines = () => {
             <Flex direction="column" align="center" mx={5}>
               <Heading
                 fontSize={{
-                  base: "60px",
+                  base: "45px",
                   md: "50px",
                   lg: "70px",
                   xl: "100px",
@@ -226,7 +226,7 @@ const ResponsiveWines = () => {
           <SwiperSlide>
             <Flex direction="column" align="center" mx={5}>
               <Heading
-                fontSize={{ base: "60px", md: "50px", lg: "70px", xl: "100px" }}
+                fontSize={{ base: "45px", md: "50px", lg: "70px", xl: "100px" }}
                 {...style}
              
               >
@@ -274,7 +274,7 @@ const ResponsiveWines = () => {
           <SwiperSlide>
             <Flex direction="column" align="center" mx={5}>
               <Heading
-                fontSize={{ base: "60px", md: "50px", lg: "70px", xl: "100px" }}
+                fontSize={{ base: "45px", md: "50px", lg: "70px", xl: "100px" }}
                 {...style}
                
               >

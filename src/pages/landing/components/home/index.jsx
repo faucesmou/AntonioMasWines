@@ -157,7 +157,7 @@ const Home = () => {
             </SwiperSlide>
           </Swiper>
         </Box>
-        <Box mb={{ base: 0, md: 2 }} height={{ base: "350px", md:"34.375rem"  }}>
+        <Box mb={{ base: 0, md: 2 }} height={{ base: "280px", md:"34.375rem"  }}>
           <Text
             as="h4"
             width="fit-content"
@@ -174,7 +174,7 @@ const Home = () => {
           >
             Enoteca
           </Text>
-          <Box mt="30px" h={{ base: "60vh", md: "34.375rem" }} overflow="hidden">
+          <Box mt="30px"/*  mb= "30px" */ h={{ base: "60vh", md: "34.375rem" }} overflow="hidden">
             <Swiper
               spaceBetween={10}
               modules={[Navigation]}
@@ -209,7 +209,7 @@ const Home = () => {
                         fontStyle="italic"
                         color="bgLight"
                         fontWeight="400"
-                        lineHeight="117%"
+                        lineHeight="100%"
                         position="relative"
                         height="100%"
                       >
